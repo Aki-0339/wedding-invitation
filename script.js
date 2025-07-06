@@ -1,6 +1,29 @@
 'use strict';
 
 // ==================================
+// ローディング演出
+// ==================================
+// 即時実行関数で囲む
+(() => {
+  const loadingLogo = document.querySelector('.loading-logo');
+
+  // ★★★ まず、ロゴに is-show クラスを付けて表示アニメーションを開始 ★★★
+  // 少し遅延させることで、CSSのtransitionが確実に発動する
+  setTimeout(() => {
+    loadingLogo.classList.add('is-show');
+  }, 100); // 0.1秒後
+
+  // windowの読み込みが"全て"完了したら、ローディング画面を消す
+  window.onload = () => {
+    const body = document.querySelector('body');
+    // .loaded クラスを付けて、メインコンテンツの表示とローディング画面を消すアニメーションを開始
+    setTimeout(() => {
+      body.classList.add('loaded');
+    }, 1500); // ロゴが表示されてから1.5秒後に実行
+  };
+})();
+
+// ==================================
 // カウントダウンタイマー
 // ==================================
 {
@@ -102,5 +125,15 @@
       submitButton.disabled = false;
       submitButton.textContent = '送信する';
     });
+  });
+}
+
+// ==================================
+// AOS (スクロールアニメーション) の初期化
+// ==================================
+{
+  AOS.init({
+    duration: 1000, // アニメーションが完了するまでの時間（ミリ秒）
+    once: true,     // アニメーションを1回だけ実行する
   });
 }

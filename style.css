@@ -1,3 +1,22 @@
+/*==============================================
+  リセット & 基本設定
+===============================================*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* スムーズなスクロールを実現 */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* 横方向のはみ出しを強制的に隠す */
+  overflow-x: hidden;
+}
+
 /* 全体の設定 */
 body {
   margin: 0;
@@ -23,7 +42,7 @@ img {
 
 /* 見出しの共通スタイル */
 h1, h2, h3 {
-  font-family: 'Playfair Display', serif; /* 見出しは英語用のフォントに */
+  font-family: 'IBM Plex Serif', serif; /* 見出しは英語用のフォントに */
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 20px;
@@ -130,7 +149,7 @@ section {
   font-size: 3rem;
   font-weight: bold;
   color: #8c9ea3;
-  font-family: 'Playfair Display', serif;
+  font-family: 'IBM Plex Serif', serif;
 }
 
 /* ギャラリーセクション */
@@ -230,7 +249,7 @@ footer {
   padding: 40px 20px;
   background-color: #333;
   color: #fff;
-  font-family: 'Playfair Display', serif;
+  font-family: 'IBM Plex Serif', serif;
 }
 
 /* ==================================
@@ -262,4 +281,63 @@ footer {
   #countdown-timer {
     font-size: 2.2rem;
   }
+}
+
+/* ==================================
+  ローディング演出
+=================================== */
+/* -- ローディング画面全体のスタイル -- */
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000; /* 背景は黒 */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  /* 2秒かけて消えるアニメーション */
+  transition: opacity 2s, visibility 2s;
+}
+
+/* -- ローディングロゴのスタイル -- */
+.loading-logo {
+  font-family: 'IBM Plex Serif' ,serif;
+  font-size: 3rem;
+  color: #8c9ea3;
+  /* 初期状態は透明で少し下にいる */
+  opacity: 0;
+  transform: translateY(20px);
+  /* "is-show"クラスが付いた時のアニメーション設定 */
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+/* ★★★ JSでこのクラスが付くと、ロゴが表示される ★★★ */
+.loading-logo.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* -- bodyに.loadedが付いた時の動作 -- */
+body.loaded #loading {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+/* -- メインコンテンツの表示制御 -- */
+.hero, .wrapper {
+  /* 初期状態は透明 */
+  opacity: 0;
+  /* loadedクラスが付いたら2秒かけて表示 */
+  transition: opacity 2s ease-in-out;
+}
+body.loaded .hero,
+body.loaded .wrapper {
+  opacity: 1;
 }

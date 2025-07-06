@@ -10,38 +10,45 @@
     <!-- Google Fontsの読み込み -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
       <!-- Slick (スライドショー) のためのCSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <!-- AOS (アニメーション) のためのCSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
     <!-- ここまで追加 -->
 </head>
 
 
 <body>
+  <div id="loading">
+    <div class="loading-logo">
+      Wedding Invitation
+    </div>
+  </div>
 
     <!-- ==================================
     ヒーローセクション（メインビジュアル）
     =================================== -->
-    <header class="hero">
+  <header class="hero">
     <div class="hero-inner">
       <h1>Akihiro & Rurina</h1>
       <p>Welcome to our Wedding Reception</p>
       <div class="hero-date">2025.11.08</div>
     </div>
-    </header>
+  </header>
 
-    <div class="wrapper">
+  <div class="wrapper">
 
 
     <main>
     <!-- ==================================
     挨拶セクション 
     =================================== -->
-    <section id="greeting" class="greeting">
-      <h2>GREETING</h2>
-      <p>
+    <section id="greeting" class="greeting" data-aos="fade-up">
+      <h2 data-aos="fade-up">GREETING</h2>
+      <p data-aos="fade-up" data-aos-delay="200">
         謹啓<br>
         皆様には健やかにお過ごしのこととお慶び申し上げます<br>
         このたび 私たちは結婚式を挙げることになりました
@@ -62,14 +69,14 @@
     <!-- ==================================
     インフォメーションセクション
     =================================== -->
-    <section id="info" class="info">
-      <h2>INFORMATION</h2>
-      <div class="info-item">
+    <section id="info" class="info" data-aos="fade-up">
+      <h2 data-aos="fade-up">INFORMATION</h2>
+      <div class="info-item" data-aos="fade-up" data-aos-delay="200">
         <h3>Date</h3>
         <p>2025年11月8日 (土曜日)</p>
         <p>受付 14:40 / 開始 15:00</p>
       </div>
-      <div class="info-item">
+      <div class="info-item" data-aos="fade-up" data-aos-delay="300">
         <h3>Location</h3>
         <p>ストリングスホテル名古屋</p>
         <p>愛知県名古屋市中村区平池町4-60-7</p>
@@ -83,10 +90,10 @@
     <!-- ==================================
     カウントダウンセクション
     =================================== -->
-    <section id="countdown" class="countdown">
-      <h2>COUNTDOWN</h2>
-      <p>Our wedding is in...</p>
-      <div id="countdown-timer">
+    <section id="countdown" class="countdown" data-aos="fade-up">
+      <h2 data-aos="fade-up">COUNTDOWN</h2>
+      <p data-aos="fade-up" data-aos-delay="200">Our wedding is in...</p>
+      <div id="countdown-timer" data-aos="zoom-in" data-aos-delay="400">
         <!-- カウントダウンの表示はJavaScriptで行います -->
       </div>
     </section>
@@ -95,9 +102,9 @@
     出欠フォームセクション
     =================================== -->
     <section id="rsvp" class="rsvp">
-      <h2>RSVP</h2>
-      <p>お手数ですが 出欠のご登録をお願いいたします</p>
-      <form id="rsvp-form">
+      <h2 data-aos="fade-up">出欠確認</h2>
+      <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします</p>
+      <form id="rsvp-form" data-aos="fade-up" data-aos-delay="300">
         <div class="form-group">
           <label for="name">お名前</label>
           <input type="text" id="name" name="name" required>
@@ -123,9 +130,9 @@
     <!-- ==================================
     フォトギャラリーセクション
     =================================== -->
-    <section id="gallery" class="gallery">
-      <h2>GALLERY</h2>
-      <div class="slider">
+    <section id="gallery" class="gallery" data-aos="fade-up">
+      <h2 data-aos="fade-up">GALLERY</h2>
+      <div class="slider" data-aos="fade-up" data-aos-delay="200">
         <div><img src="images/galary1.jpg" alt="ギャラリー写真1"></div>
         <div><img src="images/galary2.jpg" alt="ギャラリー写真2"></div>
         <div><img src="images/galary3.jpg" alt="ギャラリー写真3"></div>
@@ -137,7 +144,7 @@
   <!-- ==================================
   フッターセクション
   =================================== -->
-  <footer>
+  <footer data-aos="fade-in" data-aos-duration="1500">
     <p>Akihiro & Rurina</p>
   </footer>
   </div>
@@ -149,7 +156,8 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Slick (スライドショー) のためのJavaScript -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+  <!-- AOS (アニメーション) のためのJavaScript -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="script.js"></script>
   
 </body>
