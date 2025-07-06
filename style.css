@@ -1,0 +1,265 @@
+/* 全体の設定 */
+body {
+  margin: 0;
+  font-family: 'Noto Serif JP', serif; /* 基本のフォントを日本語明朝体に */
+  color: #333; /* 基本の文字色を少し柔らかい黒に */
+  line-height: 1.8; /* 行間を少し広めにして読みやすく */
+  background-color: #f9f9f9; /* 背景を真っ白ではなく少しだけグレーに */
+}
+
+.wrapper {
+  max-width: 800px; /* サイト全体の最大幅を設定 */
+  margin: 0 auto;    /* コンテナを中央に配置 */
+  background-color: #fff; /* コンテンツエリアの背景は白に */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* サイトにうっすら影を付けて立体感を出す */
+}
+
+/* 画像がコンテナからはみ出さないようにする設定 */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom; /* 画像の下にできる謎の隙間を消すおまじない */
+}
+
+/* 見出しの共通スタイル */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif; /* 見出しは英語用のフォントに */
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.5rem; /* remは基準サイズに対する倍率。レスポンシブに強い */
+  color: #8c9ea3; /* キーカラーの淡い青緑 */
+}
+
+/* 各セクションの共通スタイル */
+section {
+  padding: 80px 20px; /* 上下の余白を80px, 左右の余白を20px */
+}
+
+/* コンテンツの最大幅を設定するコンテナ */
+.container {
+  max-width: 900px;
+  margin: 0 auto; /* 中央揃えにするための定番テクニック */
+  padding: 0 20px;
+}
+
+/* ヒーローセクション */
+.hero {
+  height: 100vh; /* 画面の高さいっぱいに表示 */
+  background-image: url('images/waso_background_yoko.jpg'); /* ここにあなたの写真ファイル名を入れる */
+  background-size: cover; /* 画像を画面いっぱいに引き伸ばす */
+  background-position: center; /* 画像の中央を表示 */
+  display: flex; /* Flexboxを使って中の要素を中央揃えにする */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-inner {
+  background-color: rgba(0, 0, 0, 0.3); /* 半透明の黒い背景を文字の下に敷く */
+  padding: 40px 60px;
+  border-radius: 5px; /* 角を少し丸くする */
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.hero-date {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px; /* 文字間隔を少し広げる */
+}
+
+/* 挨拶セクション */
+.greeting {
+  background-color: #fff; /* 背景を白に */
+  text-align: center;
+}
+
+.greeting-names {
+  margin-top: 40px;
+  font-size: 1.2rem;
+}
+
+/* インフォメーションセクション */
+.info {
+  background-color: #eaf2f1; /* キーカラーの淡い緑 */
+}
+
+.info-item {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.info-item h3 {
+  color: #333;
+}
+
+/* Googleマップ用のスタイル */
+#map {
+  max-width: 800px; /* PCで見た時の地図の最大幅を指定 */
+  width: 95%;       /* 基本の幅（スマホなどを考慮） */
+  height: 400px;
+  margin: 20px auto 0; /* ★★★これが重要★★★ (上に20px、左右は自動で中央、下は0) */
+}
+
+/* iframeを親要素(#map)いっぱいに広げる */
+#map iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* カウントダウンセクション */
+.countdown {
+  background-color: #fff;
+  text-align: center;
+}
+#countdown-timer {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #8c9ea3;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ギャラリーセクション */
+.gallery {
+  background-color: #eaf2f1;
+}
+
+.slider div {
+  /* スライド1枚あたりの高さを指定 */
+  height: 60vh; /* 画面の高さの60%を基準にする */
+  max-height: 500px; /* ただし、最大でも500pxまで */
+}
+
+.slider img {
+  width: 100%;  /* 親要素の幅いっぱいに */
+  height: 100%; /* 親要素の高さいっぱいに */
+  object-fit: cover; /* ★★★これが重要★★★ 縦横比を保ったまま、親要素を埋め尽くすように拡大・縮小し、はみ出た部分はトリミング */
+  object-position: center; /* 表示する画像の中心を基準にする */
+}
+
+/* slickの矢印のスタイル調整 */
+.slick-prev, .slick-next {
+  z-index: 1; /* 画像より手前に表示 */
+}
+.slick-prev:before, .slick-next:before {
+  color: #333; /* 矢印の色を濃くする */
+  font-size: 30px; /* 矢印のサイズを大きくする */
+}
+
+/* スライドショーのスタイルは後で追加します */
+
+/* 出欠フォームセクション */
+.rsvp {
+  background-color: #fff;
+}
+
+.rsvp p {
+  text-align: center; /* この行を追加 */
+}
+
+.rsvp form {
+  max-width: 600px;
+  margin: 0 auto; /* フォームを中央揃えに */
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block; /* ラベルをブロック要素にして改行させる */
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* paddingを含めてwidth 100%にする */
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+}
+
+.radio-group label {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: normal;
+}
+.radio-group input[type="radio"]{
+  margin-right: 5px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #8c9ea3; /* キーカラーの青緑 */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer; /* マウスを乗せると指マークに変わる */
+  transition: background-color 0.3s; /* 背景色が0.3秒かけて変化する */
+}
+
+button[type="submit"]:hover {
+  background-color: #738488; /* マウスを乗せた時の色 */
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #333;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+}
+
+/* ==================================
+  レスポンシブ対応 (スマートフォン向け)
+=================================== */
+/* 画面幅が768px以下の場合に適用されるスタイル */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* スマホでは見出しを少し小さく */
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: 60px 15px; /* 余白も少し小さく */
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+  
+  .hero-inner {
+    padding: 20px;
+    width: 90%;
+  }
+
+  #countdown-timer {
+    font-size: 2.2rem;
+  }
+}
