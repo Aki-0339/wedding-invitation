@@ -53,9 +53,9 @@
   });
 }
 
-// ==================================
+// ===================================
 // 出欠フォームの送信処理
-// ==================================
+// ===================================
 {
   const form = document.getElementById('rsvp-form');
   const formMessage = document.getElementById('form-message');
