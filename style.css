@@ -118,6 +118,8 @@ body.scrolled .hero-inner {
 .greeting {
   background-color: #fff; /* 背景を白に */
   text-align: center;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .greeting-names {
@@ -133,6 +135,8 @@ body.scrolled .hero-inner {
 .info-item {
   margin-bottom: 40px;
   text-align: center;
+  padding-left: 15px;  /* ← 追加 */
+  padding-right: 15px; /* ← 追加 */
 }
 
 .info-item h3 {
@@ -163,6 +167,11 @@ body.scrolled .hero-inner {
   z-index: 1;
   overflow: hidden; /* 擬似要素のはみ出し防止 */
 }
+
+.countdown p { /* ← 新しくセレクタを追加 */
+    padding: 0 15px;
+}
+
 .countdown::before {
   content: '';
   position: absolute;
@@ -219,6 +228,10 @@ body.scrolled .hero-inner {
   background-color: #eaf2f1;
 }
 
+.gallery h2 { 
+    padding: 0 15px;
+}
+
 .slider div {
   /* スライド1枚あたりの高さを指定 */
   height: 60vh; /* 画面の高さの60%を基準にする */
@@ -250,11 +263,13 @@ body.scrolled .hero-inner {
 
 .rsvp p {
   text-align: center; /* この行を追加 */
+  padding: 0 15px;
 }
 
 .rsvp form {
   max-width: 600px;
   margin: 0 auto; /* フォームを中央揃えに */
+  padding: 0 15px;
 }
 
 .form-group {
@@ -343,7 +358,7 @@ footer {
   }
 
   section {
-    padding: 60px 15px; /* 余白も少し小さく */
+    padding: 60px 0px; /* 余白も少し小さく */
   }
 
   .hero h1 {
