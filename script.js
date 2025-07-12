@@ -28,33 +28,43 @@
 // ==================================
 {
   function countdown() {
-    // 目標の日時を設定
     const targetDate = new Date('2025/11/08 15:00:00');
-    // 現在の時刻を取得
     const now = new Date();
-    // 残り時間をミリ秒で計算
     const remainingTime = targetDate.getTime() - now.getTime();
+    const timerElement = document.getElementById('countdown-timer');
 
-    // 期限が過ぎた場合
     if (remainingTime < 0) {
-      document.getElementById('countdown-timer').innerHTML = 'Our Wedding has Started!';
+      timerElement.innerHTML = '<div class="timer-unit"><span class="timer-value">Our Wedding has Started!</span></div>';
       return;
     }
 
-    // ミリ秒を日、時間、分、秒に変換
-    const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    const days = String(Math.floor(remainingTime / (1000 * 60 * 60 * 24))).padStart(2, '0');
+    const hours = String(Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+    const minutes = String(Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+    const seconds = String(Math.floor((remainingTime % (1000 * 60)) / 1000)).padStart(2, '0');
 
-    // HTMLに表示
-    document.getElementById('countdown-timer').innerHTML = 
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    // HTML構造を動的に生成
+    timerElement.innerHTML = `
+      <div class="timer-unit">
+        <span class="timer-value">${days}</span>
+        <span class="timer-label">DAYS</span>
+      </div>
+      <div class="timer-unit">
+        <span class="timer-value">${hours}</span>
+        <span class="timer-label">HOURS</span>
+      </div>
+      <div class="timer-unit">
+        <span class="timer-value">${minutes}</span>
+        <span class="timer-label">MINUTES</span>
+      </div>
+      <div class="timer-unit">
+        <span class="timer-value">${seconds}</span>
+        <span class="timer-label">SECONDS</span>
+      </div>
+    `;
   }
-
-  // 1秒ごとにcountdown関数を呼び出す
+  
   setInterval(countdown, 1000);
-  // ページ読み込み時にも一度実行
   countdown();
 }
 
@@ -109,8 +119,13 @@
         // 成功した場合
         form.style.display = 'none'; // フォームを非表示に
         formMessage.textContent = 'ご返信ありがとうございます。当日お会いできるのを楽しみにしております！';
-        formMessage.style.display = 'block'; // メッセージを表示
+        formMessage.style.display = 'block'; // まず表示領域を確保
         formMessage.style.color = '#333';
+        
+        // 少し遅れてクラスを付与し、フェードインアニメーションを開始
+        setTimeout(() => {
+          formMessage.classList.add('is-show');
+        }, 100);
       } else {
         // 失敗した場合
         throw new Error('送信に失敗しました。');
@@ -134,6 +149,21 @@
 {
   AOS.init({
     duration: 1000, // アニメーションが完了するまでの時間（ミリ秒）
-    once: true,     // アニメーションを1回だけ実行する
+    once: false,     // アニメーションを1回だけ実行する
+  });
+}
+
+// ==================================
+// スクロール連動エフェクト
+// ==================================
+{
+  const body = document.querySelector('body');
+  window.addEventListener('scroll', () => {
+    // 画面の高さの半分くらいスクロールされたら
+    if (window.scrollY > window.innerHeight / 2) {
+      body.classList.add('scrolled');
+    } else {
+      body.classList.remove('scrolled');
+    }
   });
 }

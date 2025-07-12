@@ -68,37 +68,49 @@ section {
 
 /* ヒーローセクション */
 .hero {
-  height: 100vh; /* 画面の高さいっぱいに表示 */
-  background-image: url('images/waso_background_yoko.jpg'); /* ここにあなたの写真ファイル名を入れる */
-  background-size: cover; /* 画像を画面いっぱいに引き伸ばす */
-  background-position: center; /* 画像の中央を表示 */
-  display: flex; /* Flexboxを使って中の要素を中央揃えにする */
+  height: 100vh;
+  position: relative; /* 子要素を絶対配置するための基準点にする */
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
 }
 
+/* ★★★ デフォルト（スマホ用）の背景画像設定 ★★★ */
+.hero::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* ↓スマホ用の縦長画像を指定 */
+  background-image: url('images/waso_background_sp.jpg'); 
+  background-size: cover;
+  background-position: center; 
+  z-index: -1;
+  transition: opacity 1s ease-out;
+}
+
+/* ★★★ body.scrolledクラスが付いたら、背景を薄くする ★★★ */
+body.scrolled .hero::before {
+  opacity: 0.2; /* 20%の濃さにする */
+}
+
+
 .hero-inner {
-  background-color: rgba(0, 0, 0, 0.3); /* 半透明の黒い背景を文字の下に敷く */
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 40px 60px;
-  border-radius: 5px; /* 角を少し丸くする */
+  border-radius: 5px;
+  /* ↓文字が消えるアニメーション */
+  transition: opacity 0.5s ease-out;
 }
 
-.hero h1 {
-  font-size: 4rem;
-  margin: 0;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
-.hero-date {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 2px; /* 文字間隔を少し広げる */
+/* ★★★ body.scrolledクラスが付いたら、文字を消す ★★★ */
+body.scrolled .hero-inner {
+  opacity: 0;
+  pointer-events: none; /* 透明になった後、クリックなどを無効化 */
 }
 
 /* 挨拶セクション */
@@ -142,14 +154,63 @@ section {
 
 /* カウントダウンセクション */
 .countdown {
-  background-color: #fff;
+  position: relative; /* 擬似要素の基準点 */
+  padding: 100px 20px;
+  text-align: center;
+  color: #fff;
+  /* ★★★ 追加 ★★★ このセクション自体が背景の上に重なるように */
+  z-index: 1;
+  overflow: hidden; /* 擬似要素のはみ出し防止 */
+}
+.countdown::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/countdown-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+.countdown::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.countdown h2 {
+  color: #fff;
+}
+
+#countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px; /* 各要素の間隔 */
+  margin-top: 30px;
+}
+
+/* ★★★ JSで生成される要素のためのスタイル ★★★ */
+.timer-unit {
   text-align: center;
 }
-#countdown-timer {
-  font-size: 3rem;
+.timer-value {
+  font-size: 4rem;
   font-weight: bold;
-  color: #8c9ea3;
-  font-family: 'IBM Plex Serif', serif;
+  font-family: 'IBM Plex Serif', serif; /* 新しいフォントに */
+  line-height: 1;
+}
+.timer-label {
+  font-size: 1rem;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 1px;
 }
 
 /* ギャラリーセクション */
@@ -243,6 +304,21 @@ button[type="submit"]:hover {
   background-color: #738488; /* マウスを乗せた時の色 */
 }
 
+/* フォーム送信後のメッセージスタイル */
+#form-message {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 40px 20px;
+  /* 初期状態は透明にしておく */
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+/* is-showクラスが付いたら表示 */
+#form-message.is-show {
+  opacity: 1;
+}
+
 /* フッター */
 footer {
   text-align: center;
@@ -280,6 +356,18 @@ footer {
 
   #countdown-timer {
     font-size: 2.2rem;
+  }
+}
+
+/* ==================================
+  PC表示用のスタイル（タブレット横向き以上）
+=================================== */
+/* 画面幅が769px以上の場合に適用されるスタイル */
+@media (min-width: 769px) {
+  .hero::before {
+    /* ↓PC用の横長画像に上書き */
+    background-image: url('images/waso_background_pc.jpg');
+    background-position: center 70%;
   }
 }
 
