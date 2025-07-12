@@ -24,6 +24,7 @@ body {
   color: #333; /* 基本の文字色を少し柔らかい黒に */
   line-height: 1.8; /* 行間を少し広めにして読みやすく */
   background-color: #f9f9f9; /* 背景を真っ白ではなく少しだけグレーに */
+  overflow-x: hidden;
 }
 
 .wrapper {
