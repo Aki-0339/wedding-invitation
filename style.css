@@ -361,6 +361,23 @@ footer {
     padding: 60px 0px; /* 余白も少し小さく */
   }
 
+  #countdown-timer {
+    /* 要素間の隙間を少し狭める */
+    gap: 15px;
+    /* 収まりきらない場合は改行を許可する（これが一番重要！） */
+    flex-wrap: wrap;
+  }
+
+  .timer-value {
+    /* 数字のフォントサイズをスマホ向けに小さくする */
+    font-size: 2.8rem;
+  }
+
+  .timer-label {
+    /* ラベルの文字も少し小さくしてバランスをとる */
+    font-size: 0.8rem;
+  }
+
   .hero h1 {
     font-size: 2.8rem;
   }
