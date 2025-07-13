@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding invitaion for Akiruri</title>
+    <title>Akihiro & Rurina's Wedding Invitation</title>
       
-    <!-- ここから追加 -->
-    <!-- デザイン(CSS)の読み込み -->
-    <!-- Google Fontsの読み込み -->
+    <!-- Google Fonts: IBM Plex Serif と Noto Serif JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-      <!-- Slick (スライドショー) のためのCSS -->
+    
+    <!-- 外部ライブラリのCSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <!-- AOS (アニメーション) のためのCSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- 自作のスタイルシート -->
     <link rel="stylesheet" href="style.css">
-    <!-- ここまで追加 -->
 </head>
 
-
 <body>
+
+  <!-- ==================================
+  1. ローディング画面
+  =================================== -->
   <div id="loading">
-    <div class="loading-logo">
-      Wedding Invitation
-    </div>
+    <div class="loading-logo">Wedding Invitation</div>
   </div>
 
-    <!-- ==================================
-    ヒーローセクション（メインビジュアル）
-    =================================== -->
+  <!-- ==================================
+  2. ヒーローセクション（メインビジュアル）
+  =================================== -->
   <header class="hero">
     <div class="hero-inner">
       <h1>Akihiro & Rurina</h1>
@@ -39,124 +39,139 @@
     </div>
   </header>
 
+  <!-- ==================================
+  3. メインコンテンツのラッパー
+  =================================== -->
   <div class="wrapper">
-
-
     <main>
-    <!-- ==================================
-    挨拶セクション 
-    =================================== -->
-    <section id="greeting" class="greeting" data-aos="fade-up">
-      <h2 data-aos="fade-up">GREETING</h2>
-      <p data-aos="fade-up" data-aos-delay="200">
-        謹啓<br>
-        皆様には健やかにお過ごしのこととお慶び申し上げます<br>
-        このたび 私たちは結婚式を挙げることになりました
-      </p>
-      <p>
-        つきましては 日頃お世話になっております皆様に<br>
-        感謝の気持ちを込めて ささやかな披露宴を催したく存じます
-      </p>
-      <p>
-        ご多用中誠に恐縮ではございますが<br>
-        ぜひご出席いただきたく ご案内申し上げます
-      </p>
-      <p class="greeting-names">
-        晃広　瑠里奈
-      </p>
-    </section>
+      <!-- ==================================
+      4. 挨拶セクション（ボタンとモーダル）
+      =================================== -->
+      <!-- 4-1. ボタンを配置するセクション -->
+      <section id="greeting" class="greeting-button-section" data-aos="fade-up">
+        <button id="greeting-open-btn" class="hana-btn">
+          <span class="hana-btn-text">ご挨拶</span>
+        </button>
+      </section>
 
-    <!-- ==================================
-    インフォメーションセクション
-    =================================== -->
-    <section id="info" class="info" data-aos="fade-up">
-      <h2 data-aos="fade-up">INFORMATION</h2>
-      <div class="info-item" data-aos="fade-up" data-aos-delay="200">
-        <h3>Date</h3>
-        <p>2025年11月8日 (土曜日)</p>
-        <p>受付 14:40 / 開始 15:00</p>
-      </div>
-      <div class="info-item" data-aos="fade-up" data-aos-delay="300">
-        <h3>Location</h3>
-        <p>ストリングスホテル名古屋</p>
-        <p>愛知県名古屋市中村区平池町4-60-7</p>
-        <!-- Googleマップの埋め込みは後ほど行います -->
-        <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.740093878342!2d136.88126037602362!3d35.16310215826183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600377200924ee6b%3A0x76fb094778b62b42!2z44K544OI44Oq44Oz44Kw44K544Ob44OG44OrIOWQjeWPpOWxiw!5e0!3m2!1sja!2sjp!4v1751796009489!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================================
-    カウントダウンセクション
-    =================================== -->
-    <section id="countdown" class="countdown" data-aos="fade-up">
-      <h2 data-aos="fade-up">COUNTDOWN</h2>
-      <p data-aos="fade-up" data-aos-delay="200">Our wedding is in...</p>
-      <div id="countdown-timer">
-        <!-- カウントダウンの表示はJavaScriptで行います -->
-      </div>
-    </section>
-
-    <!-- ==================================
-    出欠フォームセクション
-    =================================== -->
-    <section id="rsvp" class="rsvp">
-      <h2 data-aos="fade-up">出欠確認</h2>
-      <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします</p>
-      <form id="rsvp-form" data-aos="fade-up" data-aos-delay="300">
-        <div class="form-group">
-          <label for="name">お名前</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label>ご出欠</label>
-          <div class="radio-group">
-            <input type="radio" id="attendance" name="attendance" value="出席" required>
-            <label for="attendance">ご出席</label>
-            <input type="radio" id="absence" name="attendance" value="欠席" required>
-            <label for="absence">ご欠席</label>
+      <!-- 4-2. 挨拶モーダル本体 -->
+      <div id="greeting-modal" class="shoji-modal-overlay">
+        <!-- 障子パネル（左）: 動きとデザインのみ -->
+        <div id="shoji-left" class="shoji-panel"></div>
+        
+        <!-- コンテンツ本体（中央に配置） -->
+        <div class="shoji-main-content">
+          <button id="modal-close-btn" class="shoji-close-btn">×</button>
+          <div class="greeting-inner">
+            <h2 data-aos="fade-up" data-aos-delay="500">GREETING</h2>
+            <p class="greeting-message" data-aos="fade-up" data-aos-delay="600">
+              謹啓<br>
+              皆様にはお健やかにお過ごしのことと お慶び申し上げます<br>
+              このたび 私たちは結婚式を挙げることになりました<br>
+              つきましては 日頃お世話になっております<br>
+              皆様方をお招きして ささやかな披露の宴を催したく存じます<br>
+              ご多用中誠に恐縮ではございますが<br>
+              何卒ご出席くださいますようお願い申し上げます<br>
+              　　　　　　　　　　　　　　　　　　　　　　　　　　謹白
+            </p>
+            <p class="greeting-date" data-aos="fade-up" data-aos-delay="700">
+              2025年8月吉日
+            </p>
+            <p class="greeting-names" data-aos="fade-up" data-aos-delay="800">
+              新郎：野口 晃広　新婦：瑠里奈（旧姓：岡副）
+            </p>
           </div>
         </div>
-        <div class="form-group">
-          <label for="allergies">アレルギー</label>
-          <textarea id="allergies" name="allergies" rows="3" placeholder="アレルギーがございましたらご記入ください"></textarea>
-        </div>
-        <button type="submit">送信する</button>
-      </form>
-      <p id="form-message" style="display:none;"></p>
-    </section>
 
-    <!-- ==================================
-    フォトギャラリーセクション
-    =================================== -->
-    <section id="gallery" class="gallery" data-aos="fade-up">
-      <h2 data-aos="fade-up">GALLERY</h2>
-      <div class="slider" data-aos="fade-up" data-aos-delay="200">
-        <div><img src="images/galary1.jpg" alt="ギャラリー写真1"></div>
-        <div><img src="images/galary2.jpg" alt="ギャラリー写真2"></div>
-        <div><img src="images/galary3.jpg" alt="ギャラリー写真3"></div>
+        <!-- 障子パネル（右）: 動きとデザインのみ -->
+        <div id="shoji-right" class="shoji-panel"></div>
       </div>
-    </section>
 
-  </main>
+      <!-- ==================================
+      5. インフォメーションセクション
+      =================================== -->
+      <section id="info" class="info" data-aos="fade-up">
+        <h2 data-aos="fade-up">INFORMATION</h2>
+        <div class="info-item" data-aos="fade-up" data-aos-delay="200">
+          <h3>Date</h3>
+          <p>2025年11月8日 (土曜日)</p>
+          <p>受付 14:40 / 開始 15:00</p>
+        </div>
+        <div class="info-item" data-aos="fade-up" data-aos-delay="300">
+          <h3>Location</h3>
+          <p>ストリングスホテル名古屋</p>
+          <p>愛知県名古屋市中村区平池町4-60-7</p>
+          <div id="map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.740093878342!2d136.88126037602362!3d35.16310215826183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600377200924ee6b%3A0x76fb094778b62b42!2z44K544OI44Oq44Oz44Kw44K544Ob44OG44OrIOWQjeWPpOWxiw!5e0!3m2!1sja!2sjp!4v1751796009489!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================
+      6. カウントダウンセクション
+      =================================== -->
+      <section id="countdown" class="countdown" data-aos="fade-up">
+        <h2 data-aos="fade-up">COUNTDOWN</h2>
+        <p data-aos="fade-up" data-aos-delay="200">Our wedding is in...</p>
+        <div id="countdown-timer"></div>
+      </section>
+
+      <!-- ==================================
+      7. 出欠フォームセクション
+      =================================== -->
+      <section id="rsvp" class="rsvp" data-aos="fade-up">
+        <h2 data-aos="fade-up">出欠確認</h2>
+        <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします</p>
+        <form id="rsvp-form" data-aos="fade-up" data-aos-delay="300">
+          <div class="form-group">
+            <label for="name">お名前</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label>ご出欠</label>
+            <div class="radio-group">
+              <input type="radio" id="attendance" name="attendance" value="出席" required>
+              <label for="attendance">ご出席</label>
+              <input type="radio" id="absence" name="attendance" value="欠席" required>
+              <label for="absence">ご欠席</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="allergies">アレルギー</label>
+            <textarea id="allergies" name="allergies" rows="3" placeholder="アレルギーがございましたらご記入ください"></textarea>
+          </div>
+          <button type="submit">送信する</button>
+        </form>
+        <p id="form-message"></p>
+      </section>
+
+      <!-- ==================================
+      8. フォトギャラリーセクション
+      =================================== -->
+      <section id="gallery" class="gallery" data-aos="fade-up">
+        <h2 data-aos="fade-up">GALLERY</h2>
+        <div class="slider" data-aos="fade-up" data-aos-delay="200">
+          <div><img src="images/galary1.jpg" alt="ギャラリー写真1"></div>
+          <div><img src="images/galary2.jpg" alt="ギャラリー写真2"></div>
+          <div><img src="images/galary3.jpg" alt="ギャラリー写真3"></div>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- .wrapper の終わり -->
 
   <!-- ==================================
-  フッターセクション
+  9. フッターセクション
   =================================== -->
-  <footer data-aos="fade-in" data-aos-duration="1500">
+  <footer>
     <p>Akihiro & Rurina</p>
   </footer>
-  </div>
-
+  
   <!-- ==================================
   機能(JavaScript)の読み込み
   =================================== -->
-  <!-- jQueryの読み込み (Slickが動作するのに必要) -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Slick (スライドショー) のためのJavaScript -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <!-- AOS (アニメーション) のためのJavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="script.js"></script>
   

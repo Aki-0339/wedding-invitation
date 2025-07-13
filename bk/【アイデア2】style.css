@@ -1,0 +1,525 @@
+/*==============================================
+  リセット & 基本設定
+===============================================*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* スムーズなスクロールを実現 */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* 横方向のはみ出しを強制的に隠す */
+  overflow-x: hidden;
+}
+
+/* 全体の設定 */
+body {
+  margin: 0;
+  font-family: 'Noto Serif JP', serif; /* 基本のフォントを日本語明朝体に */
+  color: #333; /* 基本の文字色を少し柔らかい黒に */
+  line-height: 1.8; /* 行間を少し広めにして読みやすく */
+  background-color: #f9f9f9; /* 背景を真っ白ではなく少しだけグレーに */
+}
+
+.wrapper {
+  max-width: 800px; /* サイト全体の最大幅を設定 */
+  margin: 0 auto;    /* コンテナを中央に配置 */
+  background-color: #fff; /* コンテンツエリアの背景は白に */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* サイトにうっすら影を付けて立体感を出す */
+  overflow-x: hidden; /* 横方向のはみ出しを隠す */
+}
+
+/* 画像がコンテナからはみ出さないようにする設定 */
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom; /* 画像の下にできる謎の隙間を消すおまじない */
+}
+
+/* 見出しの共通スタイル */
+h1, h2, h3 {
+  font-family: 'IBM Plex Serif', serif; /* 見出しは英語用のフォントに */
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.5rem; /* remは基準サイズに対する倍率。レスポンシブに強い */
+  color: #8c9ea3; /* キーカラーの淡い青緑 */
+}
+
+/* 各セクションの共通スタイル */
+section {
+  padding: 80px 20px; /* 上下の余白を80px, 左右の余白を20px */
+}
+
+/* コンテンツの最大幅を設定するコンテナ */
+.container {
+  max-width: 900px;
+  margin: 0 auto; /* 中央揃えにするための定番テクニック */
+  padding: 0 20px;
+}
+
+/* ヒーローセクション */
+.hero {
+  height: 100vh;
+  position: relative; /* 子要素を絶対配置するための基準点にする */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+/* ★★★ デフォルト（スマホ用）の背景画像設定 ★★★ */
+.hero::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* ↓スマホ用の縦長画像を指定 */
+  background-image: url('images/waso_background_sp.jpg'); 
+  background-size: cover;
+  background-position: center; 
+  z-index: -1;
+  transition: opacity 1s ease-out;
+}
+
+/* ★★★ body.scrolledクラスが付いたら、背景を薄くする ★★★ */
+body.scrolled .hero::before {
+  opacity: 0.2; /* 20%の濃さにする */
+}
+
+
+.hero-inner {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 40px 60px;
+  border-radius: 5px;
+  /* ↓文字が消えるアニメーション */
+  transition: opacity 0.5s ease-out;
+}
+
+/* ★★★ body.scrolledクラスが付いたら、文字を消す ★★★ */
+body.scrolled .hero-inner {
+  opacity: 0;
+  pointer-events: none; /* 透明になった後、クリックなどを無効化 */
+}
+
+/* 挨拶セクション */
+.greeting {
+  /* ★★★ 背景を固定する設定 ★★★ */
+  background-image: url('images/washi_bg.jpg'); /* 用意した背景画像を指定 */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* これが背景を画面に固定する魔法のコード */
+  padding-bottom: 40px; /* 下部の余白を少し調整 */
+}
+
+/* ★★★ 新しく追加 ★★★ スクロールする箱のスタイル */
+.greeting-scroll-box {
+  max-width: 500px; /* 文章エリアの最大幅 */
+  height: 400px;    /* 文章エリアの高さ */
+  margin: 30px auto; /* 上下左右中央に配置 */
+  padding: 20px 30px; /* 内側の余白 */
+  background-color: rgba(255, 255, 255, 0.85); /* 半透明の白い背景（和紙感） */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  
+  /* 内容がはみ出たら、縦方向にスクロールバーを表示 */
+  overflow-y: auto;
+}
+
+/* ★★★ 新しく追加 ★★★ スクロールバーのデザイン（任意） */
+.greeting-scroll-box::-webkit-scrollbar {
+  width: 8px;
+}
+.greeting-scroll-box::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.greeting-scroll-box::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+.greeting-scroll-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+
+/* 挨拶文のスタイル */
+.greeting-message {
+  font-size: 1rem;
+  line-height: 2;
+  color: #333; /* 文字色を濃くして読みやすく */
+}
+
+/* 日付と名前のスタイル */
+.greeting-date {
+  text-align: left;
+  padding-left: 20px;
+}
+.greeting-names {
+  text-align: right;
+  font-size: 1.2rem;
+  padding-right: 1.5em;
+  margin-top: 30px;
+}
+
+/* インフォメーションセクション */
+.info {
+  background-color: #eaf2f1; /* キーカラーの淡い緑 */
+}
+
+.info-item {
+  margin-bottom: 40px;
+  text-align: center;
+  padding-left: 15px;  /* ← 追加 */
+  padding-right: 15px; /* ← 追加 */
+}
+
+.info-item h3 {
+  color: #333;
+}
+
+/* Googleマップ用のスタイル */
+#map {
+  max-width: 800px; /* PCで見た時の地図の最大幅を指定 */
+  width: 95%;       /* 基本の幅（スマホなどを考慮） */
+  height: 400px;
+  margin: 20px auto 0; /* ★★★これが重要★★★ (上に20px、左右は自動で中央、下は0) */
+}
+
+/* iframeを親要素(#map)いっぱいに広げる */
+#map iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* カウントダウンセクション */
+.countdown {
+  position: relative; /* 擬似要素の基準点 */
+  padding: 100px 20px;
+  text-align: center;
+  color: #fff;
+  /* ★★★ 追加 ★★★ このセクション自体が背景の上に重なるように */
+  z-index: 1;
+  overflow: hidden; /* 擬似要素のはみ出し防止 */
+}
+
+.countdown p { /* ← 新しくセレクタを追加 */
+    padding: 0 15px;
+}
+
+.countdown::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/countdown-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+.countdown::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.countdown h2 {
+  color: #fff;
+}
+
+#countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px; /* 各要素の間隔 */
+  margin-top: 30px;
+}
+
+/* ★★★ JSで生成される要素のためのスタイル ★★★ */
+.timer-unit {
+  text-align: center;
+}
+.timer-value {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'IBM Plex Serif', serif; /* 新しいフォントに */
+  line-height: 1;
+}
+.timer-label {
+  font-size: 1rem;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 1px;
+}
+
+/* ギャラリーセクション */
+.gallery {
+  background-color: #eaf2f1;
+}
+
+.gallery h2 { 
+    padding: 0 15px;
+}
+
+.slider div {
+  /* スライド1枚あたりの高さを指定 */
+  height: 60vh; /* 画面の高さの60%を基準にする */
+  max-height: 500px; /* ただし、最大でも500pxまで */
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* ↓ここから変更・追加↓ */
+  transition: transform 0.6s ease, filter 0.6s ease; /* 0.6秒かけて変化するアニメーション */
+  cursor: pointer; /* マウスカーソルを指マークに */
+}
+
+.slider img:hover {
+  transform: scale(1.05); /* 1.05倍に少しだけ拡大 */
+  filter: brightness(1.08); /* 明るさを少しだけ上げる */
+}
+
+/* slickの矢印のスタイル調整 */
+.slick-prev, .slick-next {
+  z-index: 1; /* 画像より手前に表示 */
+}
+.slick-prev:before, .slick-next:before {
+  color: #333; /* 矢印の色を濃くする */
+  font-size: 30px; /* 矢印のサイズを大きくする */
+}
+
+/* スライドショーのスタイルは後で追加します */
+
+/* 出欠フォームセクション */
+.rsvp {
+  background-color: #fff;
+}
+
+.rsvp p {
+  text-align: center; /* この行を追加 */
+  padding: 0 15px;
+}
+
+.rsvp form {
+  max-width: 600px;
+  margin: 0 auto; /* フォームを中央揃えに */
+  padding: 0 15px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block; /* ラベルをブロック要素にして改行させる */
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* paddingを含めてwidth 100%にする */
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+}
+
+.radio-group label {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: normal;
+}
+.radio-group input[type="radio"]{
+  margin-right: 5px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #8c9ea3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  /* ↓ここを変更↓ 影の変化もアニメーション対象に加える */
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 通常時のうっすらした影 */
+}
+
+button[type="submit"]:hover {
+  background-color: #738488;
+  /* ↓ここを変更↓ 少し上に浮き上がらせる */
+  transform: translateY(-3px);
+  /* ↓影を少し濃く、広げて立体感を出す */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* フォーム送信後のメッセージスタイル */
+#form-message {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 40px 20px;
+  /* 初期状態は透明にしておく */
+  opacity: 0;
+  transition: opacity 1.5s;
+}
+
+/* is-showクラスが付いたら表示 */
+#form-message.is-show {
+  opacity: 1;
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #333;
+  color: #fff;
+  font-family: 'IBM Plex Serif', serif;
+}
+
+/* ==================================
+  レスポンシブ対応 (スマートフォン向け)
+=================================== */
+/* 画面幅が768px以下の場合に適用されるスタイル */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* スマホでは見出しを少し小さく */
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  section {
+    padding: 60px 0px; /* 余白も少し小さく */
+  }
+
+  #countdown-timer {
+    /* 要素間の隙間を少し狭める */
+    gap: 15px;
+    /* 収まりきらない場合は改行を許可する（これが一番重要！） */
+    flex-wrap: wrap;
+  }
+
+  .timer-value {
+    /* 数字のフォントサイズをスマホ向けに小さくする */
+    font-size: 2.8rem;
+  }
+
+  .timer-label {
+    /* ラベルの文字も少し小さくしてバランスをとる */
+    font-size: 0.8rem;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+  
+  .hero-inner {
+    padding: 20px;
+    width: 90%;
+  }
+
+  #countdown-timer {
+    font-size: 2.2rem;
+  }
+}
+
+/* ==================================
+  PC表示用のスタイル（タブレット横向き以上）
+=================================== */
+/* 画面幅が769px以上の場合に適用されるスタイル */
+@media (min-width: 769px) {
+  .hero::before {
+    /* ↓PC用の横長画像に上書き */
+    background-image: url('images/waso_background_pc.jpg');
+    background-position: center 70%;
+  }
+}
+
+/* ==================================
+  ローディング演出
+=================================== */
+/* -- ローディング画面全体のスタイル -- */
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000; /* 背景は黒 */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  /* 2秒かけて消えるアニメーション */
+  transition: opacity 2s, visibility 2s;
+}
+
+/* -- ローディングロゴのスタイル -- */
+.loading-logo {
+  font-family: 'IBM Plex Serif' ,serif;
+  font-size: 3rem;
+  color: #8c9ea3;
+  /* 初期状態は透明で少し下にいる */
+  opacity: 0;
+  transform: translateY(20px);
+  /* "is-show"クラスが付いた時のアニメーション設定 */
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+/* ★★★ JSでこのクラスが付くと、ロゴが表示される ★★★ */
+.loading-logo.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* -- bodyに.loadedが付いた時の動作 -- */
+body.loaded #loading {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+/* -- メインコンテンツの表示制御 -- */
+.hero, .wrapper {
+  /* 初期状態は透明 */
+  opacity: 0;
+  /* loadedクラスが付いたら2秒かけて表示 */
+  transition: opacity 2s ease-in-out;
+}
+body.loaded .hero,
+body.loaded .wrapper {
+  opacity: 1;
+}
