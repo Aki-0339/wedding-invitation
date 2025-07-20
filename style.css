@@ -20,8 +20,105 @@ body {
   margin: 0 auto;
   background-color: #fff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-  overflow-x: hidden;
+  overflow: hidden;
+  position: relative; 
 }
+
+/*==============================================
+  wrapper全体に舞うモミジ（画像バージョン）
+===============================================*/
+.momiji-container {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  overflow: hidden; z-index: 1; pointer-events: none;
+}
+
+.momiji {
+  position: absolute;
+  top: -10%;
+  opacity: 0;
+  user-select: none;
+  
+  /* 画像を表示するための基本設定 */
+  width: 30px; /* 画像の基本サイズ */
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* アニメーションの基本設定 */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.momiji[data-leaf="1"] { background-image: url('images/momiji-illust_brown.png'); }
+.momiji[data-leaf="2"] { background-image: url('images/momiji-illust_green.png'); }
+.momiji[data-leaf="3"] { background-image: url('images/momiji-illust_red.png'); }
+
+/* ★★★ 3種類の動きを定義 ★★★ */
+
+/* 1. ひらひらと下に落ちるアニメーション */
+@keyframes fall {
+  0% { top: -10%; transform: translateX(0px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { top: 110%; transform: translateX(20px) rotate(360deg); opacity: 0; }
+}
+
+/* 2. 左斜めに流れるアニメーション */
+@keyframes sway-left {
+  0% { top: -10%; transform: translateX(0px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { top: 110%; transform: translateX(-3000px) rotate(720deg); opacity: 0; }
+}
+
+/* 3. 右斜めに流れるアニメーション */
+@keyframes sway-right {
+  0% { top: -10%; transform: translateX(0px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { top: 110%; transform: translateX(1800px) rotate(720deg); opacity: 0; }
+}
+
+
+/* ★★★ 20個のモミジに、3種類の動きをランダムに割り振る ★★★ */
+/* グループ1: ひらひら落ちる (fall) */
+.momiji:nth-child(3n + 1) { /* 1, 4, 7, 10, 13, 16, 19番目 */
+  animation-name: fall;
+}
+/* グループ2: 左へ流れる (sway-left) */
+.momiji:nth-child(3n + 2) { /* 2, 5, 8, 11, 14, 17, 20番目 */
+  animation-name: sway-left;
+}
+/* グループ3: 右へ流れる (sway-right) */
+.momiji:nth-child(3n) { /* 3, 6, 9, 12, 15, 18番目 */
+  animation-name: sway-right;
+}
+
+/* ★★★ 各モミジの個別の設定（サイズ、位置、タイミング）★★★ */
+/* font-size を width と height に変更 */
+.momiji:nth-child(1) { left: 5%; width: 25px; height: 25px; animation-duration: 40s; animation-delay: -8s; }
+.momiji:nth-child(2) { left: 10%; width: 40px; height: 40px; animation-duration: 32s; animation-delay: -18s; }
+.momiji:nth-child(3) { left: 15%; width: 30px; height: 30px; animation-duration: 50s; animation-delay: -1s; }
+.momiji:nth-child(4) { left: 20%; width: 22px; height: 22px; animation-duration: 20s; animation-delay: -8s; }
+.momiji:nth-child(5) { left: 25%; width: 28px; height: 28px; animation-duration: 60s; animation-delay: -20s; }
+.momiji:nth-child(6) { left: 30%; width: 18px; height: 18px; animation-duration: 21s; animation-delay: -10s; }
+.momiji:nth-child(7) { left: 35%; width: 32px; height: 32px; animation-duration: 48s; animation-delay: -4s; }
+/* ...以下、同様に font-size を width と height に書き換えていく... */
+.momiji:nth-child(8) { left: 40%; width: 24px; height: 24px; animation-duration: 42s; animation-delay: -31s; }
+.momiji:nth-child(9) { left: 45%; width: 29px; height: 29px; animation-duration: 25s; animation-delay: -2s; }
+.momiji:nth-child(10) { left: 50%; width: 40px; height: 40px; animation-duration: 14s; animation-delay: -18s; }
+.momiji:nth-child(11) { left: 55%; width: 25px; height: 25px; animation-duration: 70s; animation-delay: -9s; }
+.momiji:nth-child(12) { left: 60%; width: 30px; height: 30px; animation-duration: 21s; animation-delay: -1s; }
+.momiji:nth-child(13) { left: 65%; width: 22px; height: 22px; animation-duration: 40s; animation-delay: -4s; }
+.momiji:nth-child(14) { left: 70%; width: 28px; height: 28px; animation-duration: 51s; animation-delay: -11s; }
+.momiji:nth-child(15) { left: 75%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: -3s; }
+.momiji:nth-child(16) { left: 80%; width: 32px; height: 32px; animation-duration: 39s; animation-delay: -26s; }
+.momiji:nth-child(17) { left: 85%; width: 24px; height: 24px; animation-duration: 43s; animation-delay: -8s; }
+.momiji:nth-child(18) { left: 90%; width: 29px; height: 29px; animation-duration: 24s; animation-delay: -18s; }
+.momiji:nth-child(19) { left: 95%; width: 40px; height: 40px; animation-duration: 52s; animation-delay: -5s; }
+.momiji:nth-child(20) { left: 2%; width: 30px; height: 30px; animation-duration: 47s; animation-delay: -12s; }
 img {
   max-width: 100%; height: auto; vertical-align: bottom;
 }
@@ -125,23 +222,6 @@ body.scrolled .hero-inner {
   font-family: 'Noto Serif JP', serif; font-size: 1.2rem;
   color: #333; letter-spacing: 0.2em;
 }
-/* 舞い落ちるモミジのアニメーション */
-.greeting-button-section::before,
-.greeting-button-section::after {
-  content: '🍁'; position: absolute; font-size: 2rem; top: -50px;
-  animation-name: fall; animation-duration: 10s;
-  animation-timing-function: linear; animation-iteration-count: infinite;
-  z-index: 1; opacity: 0.7;
-}
-.greeting-button-section::before { left: 20%; animation-delay: 0s; }
-.greeting-button-section::after {
-  left: 70%; font-size: 1.5rem;
-  animation-delay: 5s; animation-duration: 8s;
-}
-@keyframes fall {
-  0% { top: -50px; transform: rotate(0deg) translateX(0px); }
-  100% { top: 110%; transform: rotate(360deg) translateX(40px); }
-}
 
 /* 4-2. 挨拶モーダル（障子演出） */
 .shoji-modal-overlay {
@@ -189,7 +269,7 @@ body.scrolled .hero-inner {
 .greeting-inner h2 { text-align: center; }
 .greeting-inner .greeting-message {
   writing-mode: vertical-rl; text-orientation: mixed;
-  letter-spacing: 0.15em; line-height: 2; height: 380px;
+  letter-spacing: 0.15em; line-height: 2; height: 520px;
   margin: 30px auto 40px; font-size: 1rem;
 }
 .greeting-inner .greeting-date,
@@ -200,8 +280,11 @@ body.scrolled .hero-inner {
 /*==============================================
   5. インフォメーションセクション以降
 ===============================================*/
-.info { background-color: #eaf2f1; }
+.info { background-image: 
+    linear-gradient(to bottom, rgba(253, 250, 245, 1) 100%),
+    url('images/washi-texture.jpg');}
 .info-item { margin-bottom: 40px; text-align: center; }
+.ps {margin-bottom: 40px; text-align: center; font-size: 0.8rem; }
 #map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; }
 #map iframe { width: 100%; height: 100%; }
 .countdown { position: relative; padding: 100px 20px; text-align: center; color: #fff; z-index: 1; overflow: hidden; }
@@ -228,7 +311,7 @@ body.scrolled .hero-inner {
 .radio-group input[type="radio"]{ margin-right: 5px; }
 button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: #8c9ea3; color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
 button[type="submit"]:hover { background-color: #738488; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
-#form-message { text-align: center; font-size: 1.2rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; }
+#form-message { text-align: center; font-size: 1.2rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap;}
 #form-message.is-show { opacity: 1; }
 
 /*==============================================

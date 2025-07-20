@@ -135,7 +135,7 @@
       if (data.status === 'success') {
         form.style.display = 'none';
         formMessage.style.display = 'block';
-        formMessage.textContent = 'ご返信ありがとうございます。当日お会いできるのを楽しみにしております！';
+        formMessage.textContent = '（実装修正中ー苗字によって文言を判定）ご返信ありがとうございます。当日お会いできるのを楽しみにしております！（受付の人の場合）誠に恐れ入りますが私共の受付係をお願いいたしたく存じますので\n当日は午後１時４５分迄に\nお越しくださいますようお願い申し上げます\n（親族向け）誠に恐縮に存じますが親族紹介にもご列席賜りたく\n当日午後２時１０分迄に\nお越しくださいますようお願い申し上げます';
         formMessage.style.color = '#333';
         setTimeout(() => { formMessage.classList.add('is-show'); }, 100);
       } else { throw new Error('送信に失敗しました。'); }
