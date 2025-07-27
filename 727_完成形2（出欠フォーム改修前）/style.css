@@ -1,101 +1,101 @@
 /*==============================================
-  1. Reset & Basic Settings
+  1. リセット & 基本設定
 ===============================================*/
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 @media (max-width: 768px) {
-    html {
-        font-size: 90.625%; /* 14.5px */
-    }
+  html {
+    font-size: 90.625%; /* 14.5px */
+  }
 }
 
 body {
-    margin: 0;
-    font-family: 'IBM Plex Serif', 'Noto Serif JP', serif;
-    color: #544a47;
-    line-height: 1.9;
-    background-color: #f5f3f0;
-    overflow-x: hidden;
-    word-break: keep-all; /* Prevents awkward word breaks in Japanese */
+  margin: 0;
+  font-family: 'IBM Plex Serif', 'Noto Serif JP', serif;
+  color: #544a47;
+  line-height: 1.9;
+  background-color: #f5f3f0;
+  overflow-x: hidden;
+  /* ★★★ 日本語改行の絶対的ルールを適用 ★★★ */
+  word-break: keep-all;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    vertical-align: bottom;
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
 }
 
-h1,
-h2,
-h3 {
-    font-family: 'IBM Plex Serif', serif;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
+h1, h2, h3 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 h2 {
-    font-size: 2.5rem;
-    color: #b99362;
-    text-shadow: none;
+  font-size: 2.5rem;
+  color: #b99362;
+  text-shadow: none;
 }
 
 section {
-    padding: 40px 20px;
+  padding: 40px 20px;
+}
+
+p {
+  overflow-wrap: break-word;
 }
 
 /*==============================================
-  2. Z-index Layer Management
+  2. ページ全体の重なり順（z-index）の設計
 ===============================================*/
 .site-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100); /* Fix for mobile browser UI */
-    background-image: url('images/waso_background_sp.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    filter: brightness(0.9) contrast(1.1);
-    transition: opacity 1s ease-out, filter 1s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  background-image: url('images/waso_background_sp.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: brightness(0.9) contrast(1.1);
+  transition: opacity 1s ease-out, filter 1s ease-out;
 }
+
 body.scrolled .site-background {
-    opacity: 0.7;
-    filter: brightness(0.8) contrast(1.1);
+  opacity: 0.7;
+  filter: brightness(0.8) contrast(1.1);
 }
 
 .momiji-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.hero,
-.wrapper,
-footer {
-    position: relative;
-    z-index: 2;
+.hero, .wrapper, footer {
+  position: relative;
+  z-index: 2;
 }
 
 #loading {
-    z-index: 99999;
+  z-index: 99999;
 }
 
 /*==============================================
-  3. Falling Leaves Animation
+  3. 舞い散る木の葉のアニメーション (変更なし)
 ===============================================*/
 .momiji { position: absolute; top: -10%; opacity: 0; user-select: none; width: 30px; height: 30px; background-size: contain; background-repeat: no-repeat; background-position: center; animation-iteration-count: infinite; filter: brightness(1.1) saturate(1.2); }
 .momiji[data-leaf="1"] { background-image: url('images/momiji-illust_brown.png'); }
@@ -107,21 +107,17 @@ footer {
 .momiji:nth-child(3n + 1) { animation-name: fall; animation-timing-function: ease-in-out; }
 .momiji:nth-child(3n + 2) { animation-name: sway-left; animation-timing-function: linear; }
 .momiji:nth-child(3n) { animation-name: sway-right-fast; animation-timing-function: ease-out; }
-/* Individual leaf settings omitted for brevity */
-.momiji:nth-child(1){left:5%;width:25px;height:25px;animation-duration:40s;animation-delay:-8s}.momiji:nth-child(2){left:10%;width:40px;height:40px;animation-duration:32s;animation-delay:-18s}.momiji:nth-child(3){left:15%;width:30px;height:30px;animation-duration:50s;animation-delay:-1s}.momiji:nth-child(4){left:20%;width:22px;height:22px;animation-duration:20s;animation-delay:-8s}.momiji:nth-child(5){left:25%;width:28px;height:28px;animation-duration:60s;animation-delay:-20s}.momiji:nth-child(6){left:30%;width:18px;height:18px;animation-duration:21s;animation-delay:-10s}.momiji:nth-child(7){left:35%;width:32px;height:32px;animation-duration:48s;animation-delay:-4s}.momiji:nth-child(8){left:40%;width:24px;height:24px;animation-duration:42s;animation-delay:-31s}.momiji:nth-child(9){left:45%;width:29px;height:29px;animation-duration:25s;animation-delay:-2s}.momiji:nth-child(10){left:50%;width:40px;height:40px;animation-duration:14s;animation-delay:-18s}.momiji:nth-child(11){left:55%;width:25px;height:25px;animation-duration:70s;animation-delay:-9s}.momiji:nth-child(12){left:60%;width:30px;height:30px;animation-duration:21s;animation-delay:-1s}.momiji:nth-child(13){left:65%;width:22px;height:22px;animation-duration:40s;animation-delay:-4s}.momiji:nth-child(14){left:70%;width:28px;height:28px;animation-duration:51s;animation-delay:-11s}.momiji:nth-child(15){left:75%;width:40px;height:40px;animation-duration:18s;animation-delay:-3s}.momiji:nth-child(16){left:80%;width:32px;height:32px;animation-duration:39s;animation-delay:-26s}.momiji:nth-child(17){left:85%;width:24px;height:24px;animation-duration:43s;animation-delay:-8s}.momiji:nth-child(18){left:90%;width:29px;height:29px;animation-duration:24s;animation-delay:-18s}.momiji:nth-child(19){left:95%;width:40px;height:40px;animation-duration:52s;animation-delay:-5s}.momiji:nth-child(20){left:2%;width:30px;height:30px;animation-duration:47s;animation-delay:-12s}
+.momiji:nth-child(1) { left: 5%; width: 25px; height: 25px; animation-duration: 40s; animation-delay: -8s; } .momiji:nth-child(2) { left: 10%; width: 40px; height: 40px; animation-duration: 32s; animation-delay: -18s; } .momiji:nth-child(3) { left: 15%; width: 30px; height: 30px; animation-duration: 50s; animation-delay: -1s; } .momiji:nth-child(4) { left: 20%; width: 22px; height: 22px; animation-duration: 20s; animation-delay: -8s; } .momiji:nth-child(5) { left: 25%; width: 28px; height: 28px; animation-duration: 60s; animation-delay: -20s; } .momiji:nth-child(6) { left: 30%; width: 18px; height: 18px; animation-duration: 21s; animation-delay: -10s; } .momiji:nth-child(7) { left: 35%; width: 32px; height: 32px; animation-duration: 48s; animation-delay: -4s; } .momiji:nth-child(8) { left: 40%; width: 24px; height: 24px; animation-duration: 42s; animation-delay: -31s; } .momiji:nth-child(9) { left: 45%; width: 29px; height: 29px; animation-duration: 25s; animation-delay: -2s; } .momiji:nth-child(10) { left: 50%; width: 40px; height: 40px; animation-duration: 14s; animation-delay: -18s; } .momiji:nth-child(11) { left: 55%; width: 25px; height: 25px; animation-duration: 70s; animation-delay: -9s; } .momiji:nth-child(12) { left: 60%; width: 30px; height: 30px; animation-duration: 21s; animation-delay: -1s; } .momiji:nth-child(13) { left: 65%; width: 22px; height: 22px; animation-duration: 40s; animation-delay: -4s; } .momiji:nth-child(14) { left: 70%; width: 28px; height: 28px; animation-duration: 51s; animation-delay: -11s; } .momiji:nth-child(15) { left: 75%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: -3s; } .momiji:nth-child(16) { left: 80%; width: 32px; height: 32px; animation-duration: 39s; animation-delay: -26s; } .momiji:nth-child(17) { left: 85%; width: 24px; height: 24px; animation-duration: 43s; animation-delay: -8s; } .momiji:nth-child(18) { left: 90%; width: 29px; height: 29px; animation-duration: 24s; animation-delay: -18s; } .momiji:nth-child(19) { left: 95%; width: 40px; height: 40px; animation-duration: 52s; animation-delay: -5s; } .momiji:nth-child(20) { left: 2%; width: 30px; height: 30px; animation-duration: 47s; animation-delay: -12s; }
 
 /*==============================================
-  4. Loading & Hero Section
+  4. ローディング & ヒーロー
 ===============================================*/
 #loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #f5f3f0; display: flex; justify-content: center; align-items: center; opacity: 1; visibility: visible; transition: opacity 2s, visibility 2s; }
 .loading-logo { font-family: 'IBM Plex Serif', serif; font-size: 1.5rem; color: #b99362; letter-spacing: 0.1em; opacity: 0; transform: translateY(20px); transition: opacity 1.5s ease-out, transform 1.5s ease-out; }
 .loading-logo.is-show { opacity: 1; transform: translateY(0); }
 body.loaded #loading { opacity: 0; visibility: hidden; }
-
-.hero,
-.wrapper { opacity: 0; transition: opacity 2s ease-in-out; }
-body.loaded .hero,
-body.loaded .wrapper { opacity: 1; }
+.hero, .wrapper { opacity: 0; transition: opacity 2s ease-in-out; }
+body.loaded .hero, body.loaded .wrapper { opacity: 1; }
 
 .hero { height: 90vh; min-height: 600px; display: flex; justify-content: center; align-items: center; text-align: center; color: white; background-color: transparent; }
 .hero-inner { padding: 40px; }
@@ -133,28 +129,28 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 @keyframes scroll-down-anim { 0% { height: 0; opacity: 0; } 50% { height: 20px; opacity: 1; } 100% { height: 0; opacity: 0; transform: translateY(20px); } }
 
 /*==============================================
-  5. Main Content Wrapper & Sections
+  5. メインコンテンツ (.wrapper)
 ===============================================*/
 .wrapper { max-width: 900px; margin: 0 auto; overflow: hidden; padding: 0 20px; }
 #greeting, .info, .gallery, .rsvp, .countdown { background: #ffffff; border: 1px solid #e0d9d4; border-radius: 10px; margin: 0 auto 40px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; }
 .wrapper > main > section:first-child { margin-top: 40px; }
 
 /*==============================================
-  6. Individual Sections
+  6. 各セクションの個別スタイル
 ===============================================*/
-/* Greeting */
+/* --- 挨拶セクション --- */
 #greeting .greeting-inner { padding: 40px; text-align: center; }
 #greeting .greeting-message { display: inline-block; writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 0.15em; line-height: 2; font-size: 1rem; margin: 20px auto; height: 520px; text-align: left; }
 #greeting .greeting-date, #greeting .greeting-names { text-align: right; margin-top: 20px; }
 
-/* Information */
+/* --- インフォメーション --- */
 .info-item { margin-bottom: 40px; text-align: center; }
 .info-item h3 { color: #b99362; }
 .ps { margin-bottom: 40px; text-align: center; font-size: 0.9rem; }
 #map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; border-radius: 8px; overflow: hidden; }
-#map iframe { width: 100%; height: 100%; border: 0; }
+#map iframe { width: 100%; height: 100%; border:0; }
 
-/* Countdown */
+/* --- カウントダウン --- */
 .countdown { padding: 60px 20px; }
 .countdown p { text-align: center; }
 #countdown-timer { display: flex; justify-content: center; align-items: baseline; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
@@ -162,7 +158,7 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .timer-value { font-size: 4rem; font-weight: bold; font-family: 'IBM Plex Serif', serif; line-height: 1; color: #b99362; }
 .timer-label { font-size: 1rem; font-family: 'Noto Serif JP', serif; letter-spacing: 1px; color: #544a47; opacity: 0.8; }
 
-/* Gallery */
+/* --- ギャラリー --- */
 .gallery { overflow: visible; }
 .gallery h2 { margin-bottom: 40px; }
 .slider .slick-slide { display: flex !important; justify-content: center; align-items: center; aspect-ratio: 1 / 1; }
@@ -174,84 +170,43 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .slick-prev:before, .slick-next:before { color: rgba(84, 74, 71, 0.7); font-size: 40px; opacity: 0.5; transition: opacity 0.3s; }
 .gallery:hover .slick-prev:before, .gallery:hover .slick-next:before { opacity: 1; }
 
-/* RSVP Form */
+/* --- フォーム --- */
 .rsvp p { text-align: center; }
 .rsvp form { max-width: 600px; margin: 0 auto; padding: 0 15px; }
 .form-group { margin-bottom: 25px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #b99362; }
 .form-group input[type="text"], .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: 'Noto Serif JP', serif; font-size: 1rem; background-color: #fdfdfd; }
 .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; }
-.radio-group input[type="radio"] { margin-right: 5px; }
+.radio-group input[type="radio"]{ margin-right: 5px; }
 button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: #b99362; color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
 button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
 #form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: #544a47; }
 #form-message.is-show { opacity: 1; }
 
-/* Omotenashi View */
-#rsvp-omotenashi-view { text-align: center; padding: 20px; }
-.omotenashi-main-message { font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; }
-.omotenashi-status { margin: 20px 0; }
-.omotenashi-status hr { border: none; border-top: 1px solid #e0d9d4; margin: 15px auto; width: 80%; }
-.omotenashi-status p { margin: 0; font-size: 1.1rem; }
-.status-attendance.attending { font-weight: bold; color: #b99362; }
-.status-attendance.absent { font-weight: bold; color: #888; }
-.omotenashi-info { margin: 30px 0; padding: 20px; background-color: #fcfaf7; border-radius: 8px; }
-.omotenashi-info .info-title { font-weight: bold; color: #b99362; margin-bottom: 10px; }
-.omotenashi-info p { margin: 0; line-height: 1.8; }
-.omotenashi-common-info { font-size: 0.9em; opacity: 0.9; margin-bottom: 30px; }
-.omotenashi-shortcuts { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
-.shortcut-btn { display: inline-block; padding: 10px 20px; border: 1px solid #b99362; color: #b99362; text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s; }
-.shortcut-btn:hover { background-color: #b99362; color: #fff; }
-.omotenashi-contact { font-size: 0.8em; opacity: 0.8; line-height: 1.7; }
-
-.rsvp-reset-wrapper {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #e0d9d4;
-}
-.rsvp-reset-link {
-    font-size: 0.8em;
-    color: #888;
-    text-decoration: underline;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-.rsvp-reset-link:hover {
-    color: #b99362;
-}
-
-/* Footer */
+/* --- フッター --- */
 footer { text-align: center; padding: 40px 20px; background-color: transparent; color: #544a47; opacity: 0.7; font-family: 'IBM Plex Serif', serif; }
 
-/*==============================================
-  7. Responsive Design
-===============================================*/
-/* SP-only line break */
+/* --- SP専用改行 --- */
 .sp-only { display: none; }
+@media (max-width: 768px) { .sp-only { display: block; } }
+
+/*==============================================
+  7. レスポンシブ対応
+===============================================*/
+@media (min-width: 769px) { .site-background { background-image: url('images/waso_background_pc.jpg'); } }
+
 @media (max-width: 768px) {
-    .sp-only { display: block; }
-}
+  #greeting .greeting-inner { padding: 40px 15px; }
+  #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; }
+  #greeting .greeting-date, #greeting .greeting-names { text-align: right; }
 
-/* PC-specific background */
-@media (min-width: 769px) {
-    .site-background { background-image: url('images/waso_background_pc.jpg'); }
-}
+  .ps { font-size: 0.85rem; }
 
-/* SP-specific adjustments */
-@media (max-width: 768px) {
-    #greeting .greeting-inner { padding: 40px 15px; }
-    #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; }
-    #greeting .greeting-date,
-    #greeting .greeting-names { text-align: right; }
-
-    .ps { font-size: 0.85rem; }
-
-    #countdown-timer { gap: 15px; row-gap: 25px; }
-    .timer-value { font-size: 3rem; }
-    .timer-label { font-size: 0.75rem; letter-spacing: 0; }
-
-    .slick-prev { left: -10px; }
-    .slick-next { right: -10px; }
-    .slick-prev:before,
-    .slick-next:before { font-size: 30px; }
+  #countdown-timer { gap: 15px; row-gap: 25px; }
+  .timer-value { font-size: 3rem; }
+  .timer-label { font-size: 0.75rem; letter-spacing: 0; }
+  
+  .slick-prev { left: -10px; }
+  .slick-next { right: -10px; }
+  .slick-prev:before, .slick-next:before { font-size: 30px; }
 }
