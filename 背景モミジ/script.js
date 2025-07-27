@@ -1,27 +1,30 @@
 'use strict';
 
 // ==================================
-// 1. ローディング演出 (変更なし)
+// 1. ローディング演出
 // ==================================
 (() => {
   const loadingLogo = document.querySelector('.loading-logo');
+  // ページ読み込み後、すぐにロゴ表示アニメーションを開始
   setTimeout(() => {
     loadingLogo.classList.add('is-show');
   }, 100);
+  // 画像など全てのリソースが読み込み完了したら、ローディング画面を消す
   window.onload = () => {
     const body = document.querySelector('body');
     setTimeout(() => {
       body.classList.add('loaded');
-    }, 1500);
+    }, 1500); // ロゴ表示から1.5秒後に実行
   };
 })();
 
 // ==================================
-// 2. スクロール連動エフェクト (変更なし)
+// 2. スクロール連動エフェクト (パララックス)
 // ==================================
 {
   const body = document.querySelector('body');
   window.addEventListener('scroll', () => {
+    // 画面の高さの半分くらいスクロールされたらクラスを付与
     if (window.scrollY > window.innerHeight / 2) {
       body.classList.add('scrolled');
     } else {
@@ -31,27 +34,34 @@
 }
 
 // ==================================
-// 3. 挨拶モーダル（障子演出） (変更なし)
+// 3. 挨拶モーダル（障子演出）
 // ==================================
 {
   const modal = document.getElementById('greeting-modal');
   const openBtn = document.getElementById('greeting-open-btn');
   const closeBtn = document.getElementById('modal-close-btn');
   const greetingSection = document.getElementById('greeting'); 
+
+  // --- 開閉機能 ---
   const openModal = () => {
     modal.classList.add('is-open');
+    // 少し遅れてAOSをリフレッシュし、モーダル内のアニメーションを有効化
     setTimeout(() => AOS.refresh(), 500);
   };
   const closeModal = () => {
     modal.classList.remove('is-open');
   };
+  
+  // --- イベント設定 ---
   openBtn.addEventListener('click', openModal);
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    if (e.target === modal) { // 背景の黒い部分をクリックしたら閉じる
       closeModal();
     }
   });
+
+  // --- 初回のみ自動表示 ---
   let hasBeenShown = sessionStorage.getItem('greetingModalShown');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -67,7 +77,7 @@
 }
 
 // ==================================
-// 4. カウントダウンタイマー (変更なし)
+// 4. カウントダウンタイマー
 // ==================================
 {
   function countdown() {
@@ -96,7 +106,7 @@
 }
 
 // ==================================
-// 5. フォトギャラリー（Slick.js） (変更なし)
+// 5. フォトギャラリー（Slick.js）
 // ==================================
 {
   $('.slider').slick({
@@ -111,67 +121,29 @@
 {
   const form = document.getElementById('rsvp-form');
   const formMessage = document.getElementById('form-message');
-  // ★ GASのURLはご自身のものに書き換えてください
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3A3_92ekWk0KJdHEklUR4vuM3NLaSxWGOWG8CCaxFNoZPt4XuJ0bLaHrTguuUAOv7/exec'; 
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3A3_92ekWk0KJdHEklUR4vuM3NLaSxWGOWG8CCaxFNoZPt4XuJ0bLaHrTguuUAOv7/exec'; // あなたのGASのURLに書き換えてください
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     const submitButton = form.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     submitButton.textContent = '送信中...';
-    
     const formData = new FormData(form);
-    
     fetch(GAS_URL, { method: 'POST', body: formData, })
-    .then(response => {
-      // GASからのレスポンスが正常でも、エラーを含む場合があるためチェック
-      if (!response.ok) {
-        throw new Error('ネットワーク応答が正常ではありませんでした。');
-      }
-      return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
       if (data.status === 'success') {
         form.style.display = 'none';
         formMessage.style.display = 'block';
-
-        // ★ 提案5: 出欠に応じてメッセージを動的に変更
-        const attendanceValue = formData.get('attendance');
-        const nameValue = formData.get('name'); // 名前の値を取得
-        let messageText = '';
-
-        if (attendanceValue === '出席') {
-          messageText = 'ご多用の中 ご出席とのご返事をいただき\n誠にありがとうございます\n当日お会いできることを心より楽しみにしております';
-          
-          // --- ★★★ 役割に応じたメッセージ追加（実装例） ★★★ ---
-          // 事前に受付や親族の方の苗字をリストアップしておきます
-          const receptionList = ['山田', '山内', '受付'];
-          const familyList = ['野口', '岡副', '親族'];
-
-          // 入力された名前とリストを照合します
-          if (receptionList.some(receptionName => nameValue.includes(receptionName))) {
-            messageText += '\n\n誠に恐れ入りますが 私共の受付係をお願いいたしたく存じますので\n当日は午後1時45分迄にお越しくださいますようお願い申し上げます';
-          } else if (familyList.some(familyName => nameValue.includes(familyName))) {
-             messageText += '\n\n誠に恐縮に存じますが 親族紹介にもご列席賜りたく\n当日午後2時10分迄にお越しくださいますようお願い申し上げます';
-          }
-          // --- ★★★ ここまでが実装例 ★★★ ---
-
-        } else { // 欠席の場合
-          messageText = 'ご丁寧にご連絡いただきありがとうございます\nお気持ち大変嬉しく存じます\nまたお会いできる日を楽しみにしております';
-        }
-
-        formMessage.textContent = messageText;
+        formMessage.textContent = '（実装修正中ー苗字によって文言を判定）ご返信ありがとうございます。当日お会いできるのを楽しみにしております！（受付の人の場合）誠に恐れ入りますが私共の受付係をお願いいたしたく存じますので\n当日は午後１時４５分迄に\nお越しくださいますようお願い申し上げます\n（親族向け）誠に恐縮に存じますが親族紹介にもご列席賜りたく\n当日午後２時１０分迄に\nお越しくださいますようお願い申し上げます';
+        formMessage.style.color = '#333';
         setTimeout(() => { formMessage.classList.add('is-show'); }, 100);
-
-      } else {
-        // GAS側で処理が失敗した場合
-        throw new Error(data.message || '送信に失敗しました。');
-      }
+      } else { throw new Error('送信に失敗しました。'); }
     })
     .catch(error => {
       formMessage.style.display = 'block';
       formMessage.textContent = 'エラーが発生しました。時間をおいて再度お試しください。';
-      formMessage.style.color = 'red'; // エラー時のみ色を直接指定
+      formMessage.style.color = 'red';
       submitButton.disabled = false;
       submitButton.textContent = '送信する';
     });
@@ -179,11 +151,11 @@
 }
 
 // ==================================
-// 7. AOS (スクロールアニメーション) の初期化 (変更なし)
+// 7. AOS (スクロールアニメーション) の初期化
 // ==================================
 {
   AOS.init({
-    duration: 1000,
-    once: false,
+    duration: 2500,
+    once: true, // falseにすることでアニメーションが繰り返される
   });
 }

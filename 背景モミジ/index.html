@@ -20,13 +20,7 @@
 </head>
 
 <body>
-  <!-- ★ サイト全体の固定背景 -->
-  <div class="site-background"></div>
-  <div class="momiji-container">
-      <!-- (紅葉の要素は変更なし) -->
-      <span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="3"></span>
-  </div>
-    
+
   <!-- ==================================
   1. ローディング画面
   =================================== -->
@@ -43,38 +37,63 @@
       <p>Welcome to our Wedding Reception</p>
       <div class="hero-date">2025.11.08</div>
     </div>
-    <!-- ★ 提案2: スクロールを促すアイコンを追加 -->
-    <div class="scroll-down"><span>SCROLL</span></div>
   </header>
 
   <!-- ==================================
   3. メインコンテンツのラッパー
   =================================== -->
   <div class="wrapper">
+    <div class="momiji-container">
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="2"></span>
+      <span class="momiji" data-leaf="3"></span>
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="2"></span>
+      <span class="momiji" data-leaf="3"></span>
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="2"></span>
+      <span class="momiji" data-leaf="3"></span>
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="2"></span>
+      <span class="momiji" data-leaf="3"></span>
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="2"></span>
+      <span class="momiji" data-leaf="3"></span>
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="2"></span>
+      <span class="momiji" data-leaf="3"></span>
+      <span class="momiji" data-leaf="1"></span>
+      <span class="momiji" data-leaf="3"></span>
+    </div>
+    
     <main>
-      <!-- (以降のHTML構造は変更ありません) -->
       <!-- ==================================
       4. 挨拶セクション（ボタンとモーダル）
       =================================== -->
-      <section id="greeting" class="greeting-button-section" data-aos="fade-up">
+      <!-- 4-1. ボタンを配置するセクション -->
+      <section id="greeting" class="greeting-button-section">
         <button id="greeting-open-btn" class="hana-btn">
           <span class="hana-btn-text">ご挨拶</span>
         </button>
       </section>
 
+      <!-- 4-2. 挨拶モーダル本体 -->
       <div id="greeting-modal" class="shoji-modal-overlay">
+        <!-- 障子パネル（左）: 動きとデザインのみ -->
         <div id="shoji-left" class="shoji-panel"></div>
+        
+        <!-- コンテンツ本体（中央に配置） -->
         <div class="shoji-main-content">
           <button id="modal-close-btn" class="shoji-close-btn">×</button>
           <div class="greeting-inner">
             <h2 data-aos="fade-up" data-aos-delay="500">ご挨拶</h2>
             <p class="greeting-message" data-aos="fade-up" data-aos-delay="600">
-              謹啓　晩夏の候<br>
+              謹啓<br>
               皆様にはお健やかにお過ごしのことと お慶び申し上げます<br>
               このたび 私たちは結婚式を挙げることになりました<br>
               つきましては 日頃お世話になっております<br>
               皆様方をお招きして ささやかな披露の宴を催したく存じます<br>
-              ご多用中誠におそれいりますが<br>
+              ご多用中誠に恐縮ではございますが<br>
               何卒ご出席くださいますようお願い申し上げます<br>
               　　　　　　　　　　　　　　　　　　　　　　　　　　謹白
             </p>
@@ -86,23 +105,25 @@
             </p>
           </div>
         </div>
+
+        <!-- 障子パネル（右）: 動きとデザインのみ -->
         <div id="shoji-right" class="shoji-panel"></div>
       </div>
-      
+
       <!-- ==================================
       5. インフォメーションセクション
       =================================== -->
-      <section id="info" class="info" data-aos="fade-up">
+      <section id="info" class="info">
         <h2 data-aos="fade-up">INFORMATION</h2>
         <div class="info-item" data-aos="fade-up" data-aos-delay="200">
           <h3>Date</h3>
           <p>2025年11月8日 (土曜日)</p>
-          <p>挙式　　　午後3時00分</p>
-          <p>披露宴　　午後3時50分</p>
+          <p>挙式　　　午後３時００分</p>
+          <p>披露宴　　午後３時５０分</p>
         </div>
         <div class="ps" data-aos="fade-up" data-aos-delay="200">
-          <p>ご多用中誠に恐縮に存じますが挙式にもご参列賜りたく<br class="sp-only">
-            当日午後2時40分迄にお越しくださいますようにお願い申し上げます</p>
+          <p>ご多用中誠に恐縮に存じますが挙式にもご参列賜りたく<br>
+            当日午後２時４０分迄にお越しくださいますようにお願い申し上げます</p>
         </div>
         <div class="info-item" data-aos="fade-up" data-aos-delay="300">
           <h3>Location</h3>
@@ -118,10 +139,10 @@
       <!-- ==================================
       6. カウントダウンセクション
       =================================== -->
-      <section id="countdown" class="countdown" data-aos="fade-up">
-        <h2 data-aos="fade-up">COUNTDOWN</h2>
-        <p data-aos="fade-up" data-aos-delay="200">Our wedding is in...</p>
-        <div id="countdown-timer"></div>
+      <section id="countdown" class="countdown">
+        <h2 data-aos="slide-right" data-aos-duration="2000" data-aos-delay="250">COUNTDOWN</h2>
+        <p data-aos="slide-left" data-aos-duration="2000" data-aos-delay="220">Our wedding is in...</p>
+        <div id="countdown-timer" data-aos="slide-right" data-aos-duration="2000" data-aos-delay="200"></div>
       </section>
 
       <!-- ==================================
@@ -130,7 +151,7 @@
       <section id="rsvp" class="rsvp" data-aos="fade-up">
         <h2 data-aos="fade-up">ご返信</h2>
         <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします<br>
-         尚 誠に勝手ながら9月25日迄に<br class="sp-only">お返事いただければ幸いに存じます</p>
+         尚 誠に勝手ながら９月２５日迄にお返事いただければ幸いに存じます</p>
         <form id="rsvp-form" data-aos="fade-up" data-aos-delay="300">
           <div class="form-group">
             <label for="name">お名前</label>
@@ -151,7 +172,17 @@
           </div>
           <button type="submit">送信する</button>
         </form>
-        <!-- ★ フォーム送信後のメッセージ表示エリア (JSで制御) -->
+        <p>ご返信ありがとうございます。当日お会いできるのを楽しみにしております！<br>
+          （実装修正中ー苗字によって文言を判定）<br>
+          （受付の人の場合）<br>
+          誠に恐れ入りますが私共の受付係をお願いいたしたく存じますので<br>
+          当日は午後１時４５分迄に<br>
+          お越しくださいますようお願い申し上げます<br>
+          （親族向け）<br>
+          誠に恐縮に存じますが親族紹介にもご列席賜りたく<br>
+          当日午後２時１０分迄に<br>
+          お越しくださいますようお願い申し上げます
+        </p>
         <p id="form-message"></p>
       </section>
 
