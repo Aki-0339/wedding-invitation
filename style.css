@@ -10,7 +10,8 @@ html {
 }
 @media (max-width: 768px) {
   html {
-    font-size: 93.75%;
+    /* ★★★ 文字サイズを最終調整 ★★★ */
+    font-size: 90.625%; /* 16px * 0.90625 = 14.5px */
   }
 }
 
@@ -18,9 +19,13 @@ body {
   margin: 0;
   font-family: 'IBM Plex Serif', 'Noto Serif JP', serif;
   color: #544a47;
-  line-height: 1.8;
+  /* ★★★ 行間を最終調整 ★★★ */
+  line-height: 1.9;
   background-color: #f5f3f0;
   overflow-x: hidden;
+  /* ★★★ 日本語改行の基本ルールを適用 ★★★ */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 img {
@@ -47,9 +52,12 @@ section {
   padding: 40px 20px;
 }
 
-p {
-  /* ★ 問題2解決: 日本語の改行を美しく保つための最適なルールを適用 */
-  overflow-wrap: break-word;
+/* ★★★ 改行制御用のクラスを定義 ★★★ */
+.text-break-normal {
+  word-break: normal;
+}
+.text-break-strict {
+  line-break: strict;
   word-break: normal;
 }
 
@@ -146,7 +154,8 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 /* --- インフォメーション --- */
 .info-item { margin-bottom: 40px; text-align: center; }
 .info-item h3 { color: #b99362; }
-.ps { margin-bottom: 40px; text-align: center; font-size: 0.8rem; opacity: 0.8; }
+.ps { margin-bottom: 40px; text-align: center; font-size: 0.9rem; }
+.info-item p, .ps p { text-align: center; } /* 中央揃えを明示 */
 #map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; border-radius: 8px; overflow: hidden; }
 #map iframe { width: 100%; height: 100%; border:0; }
 
@@ -159,13 +168,13 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .timer-label { font-size: 1rem; font-family: 'Noto Serif JP', serif; letter-spacing: 1px; color: #544a47; opacity: 0.8; }
 
 /* --- ギャラリー --- */
+.gallery { overflow: visible; } /* 矢印がはみ出ることを許可 */
 .gallery h2 { margin-bottom: 40px; }
-/* ★ 問題3解決: Slickスライダーが生成する要素を直接指定 */
-.slider .slick-slide { aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; }
-.slider .slick-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 8px; background-color: #ffffff; }
+.slider .slick-slide { aspect-ratio: 1 / 1; display: flex !important; justify-content: center; align-items: center; }
+.slider .slick-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 8px; }
 .slick-prev, .slick-next { top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 40px; }
-.slick-prev { left: -50px; }
-.slick-next { right: -50px; }
+.slick-prev { left: -60px; }
+.slick-next { right: -60px; }
 .slick-prev:before, .slick-next:before { color: rgba(84, 74, 71, 0.7); font-size: 40px; opacity: 0.5; transition: opacity 0.3s; }
 .gallery:hover .slick-prev:before, .gallery:hover .slick-next:before { opacity: 1; }
 
@@ -179,7 +188,7 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .radio-group input[type="radio"]{ margin-right: 5px; }
 button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: #b99362; color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
 button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
-#form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: #544a47; line-height: 2; }
+#form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: #544a47; }
 #form-message.is-show { opacity: 1; }
 
 /* --- フッター --- */
@@ -194,17 +203,16 @@ footer { text-align: center; padding: 40px 20px; background-color: transparent; 
 ===============================================*/
 @media (min-width: 769px) { .site-background { background-image: url('images/waso_background_pc.jpg'); } }
 @media (max-width: 768px) {
-  /* ★ 問題1解決: スマホ表示の挨拶文の高さをautoに */
   #greeting .greeting-inner { padding: 40px 15px; }
-  #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; line-height: 2.2; }
+  #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; }
   #greeting .greeting-date, #greeting .greeting-names { text-align: right; }
 
-  /* --- カウントダウン --- */
+  .ps { font-size: 0.85rem; }
+
   #countdown-timer { gap: 15px; row-gap: 25px; }
   .timer-value { font-size: 3rem; }
   .timer-label { font-size: 0.75rem; letter-spacing: 0; }
   
-  /* --- ギャラリーの矢印 --- */
   .slick-prev { left: -10px; }
   .slick-next { right: -10px; }
   .slick-prev:before, .slick-next:before { font-size: 30px; }
