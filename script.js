@@ -1,6 +1,18 @@
 'use strict';
 
 // ==================================
+// 0. スマホの背景ズーム問題対策 (VH固定)
+// ==================================
+(() => {
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+  window.addEventListener('load', setVh);
+  window.addEventListener('resize', setVh);
+})();
+
+// ==================================
 // 1. ローディング演出
 // ==================================
 (() => {
