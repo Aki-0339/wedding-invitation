@@ -2,7 +2,13 @@
   1. リセット & 基本設定
 ===============================================*/
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* ★ 問題5対策: スマホ表示時に基準の文字サイズを少し小さくする */
+  @media (max-width: 768px) {
+    font-size: 93.75%; /* 16px * 0.9375 = 15px */
+  }
+}
 
 body {
   margin: 0;
@@ -30,6 +36,7 @@ section { padding: 40px 20px; }
 ===============================================*/
 .site-background {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
   background-image: url('images/waso_background_sp.jpg');
   background-size: cover; background-position: center;
   z-index: -1; 
@@ -133,9 +140,33 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .greeting-inner { width: 100%; height: 100%; overflow-y: auto; padding: 50px 40px; color: #544a47; /* ★ 文字色を統一 */ }
 .shoji-close-btn { position: absolute; top: 15px; right: 20px; z-index: 15; font-size: 2.5rem; color: #888; text-shadow: none; background: none; border: none; cursor: pointer; transition: color 0.3s; }
 .shoji-close-btn:hover { color: #333; }
-.greeting-inner h2 { text-align: center; }
-.greeting-inner .greeting-message { writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 0.15em; line-height: 2; height: 520px; margin: 30px auto 40px; font-size: 1rem; }
-.greeting-inner .greeting-date, .greeting-inner .greeting-names { text-align: left; margin-top: 30px; }
+.greeting-inner {
+  width: 100%;
+  height: 100%;
+  color: #544a47;
+  /* ★ 問題2対策: フレックスボックスで内部コンテンツを制御 */
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+.greeting-inner h2 {
+  flex-shrink: 0; /* 見出しは縮まないようにする */
+}
+.greeting-inner .greeting-message {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 0.15em;
+  line-height: 2;
+  font-size: 1rem;
+  margin: 20px auto;
+  /* ★ 問題2対策: 高さを固定せず、フレックスアイテムとして伸縮するように */
+  overflow-y: auto; /* 内容が多い場合はここがスクロールする */
+}
+.greeting-inner .greeting-date, .greeting-inner .greeting-names {
+  text-align: left;
+  margin-top: 20px;
+  flex-shrink: 0; /* 日付や名前も縮まない */
+}
 
 /* --- インフォメーション --- */
 .info-item { margin-bottom: 40px; text-align: center; }
@@ -169,7 +200,20 @@ button[type="submit"] { display: block; width: 100%; padding: 15px; background-c
 button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
 
 /* ★ 提案5: フォーム送信後メッセージのスタイル */
-#form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: #544a47; line-height: 2; }
+#form-message {
+  text-align: center;
+  font-size: 1rem;
+  padding: 40px 20px;
+  display: none;
+  opacity: 0;
+  transition: opacity 1.5s;
+  white-space: pre-wrap;
+  color: #544a47;
+  line-height: 2;
+  /* ★★★ ここを追加 ★★★ */
+  /* ★ 問題1対策: はみ出す可能性のある長い文字列を強制的に改行 */
+  word-break: break-all;
+}
 #form-message.is-show { opacity: 1; }
 
 footer { text-align: center; padding: 40px 20px; background-color: transparent; color: #544a47; opacity: 0.7; font-family: 'IBM Plex Serif', serif; }
@@ -198,7 +242,14 @@ p {
 
 /* ★ 提案3: 挨拶モーダルのレスポンシブ対応 */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.5rem; }
+  .hero h1 { font-size: 2.8rem; }
+  
+  @media (max-width: 375px) {
+    .hero h1 {
+      font-size: 2.4rem;
+    }
+  }
+  
   .greeting-inner { padding: 40px 15px; }
   .greeting-inner .greeting-message {
     writing-mode: horizontal-tb; /* 横書きに変更 */

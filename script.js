@@ -1,4 +1,17 @@
 'use strict';
+// ==================================
+// 0. スマホの背景ズーム問題対策 (VH固定)
+// ==================================
+// 背景画像の不自然な拡大を防ぐため、最初にビューポートの高さを取得し、CSSのカスタムプロパティに設定する
+(() => {
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+  // 読み込み時と画面サイズ変更時に実行
+  window.addEventListener('load', setVh);
+  window.addEventListener('resize', setVh);
+})();
 
 // ==================================
 // 1. ローディング演出 (変更なし)
