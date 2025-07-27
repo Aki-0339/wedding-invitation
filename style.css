@@ -21,7 +21,7 @@ body {
   line-height: 1.9;
   background-color: #f5f3f0;
   overflow-x: hidden;
-  /* ★★★ 日本語改行の絶対的ルールを適用 ★★★ */
+  /* 日本語の改行を美しく保つための絶対ルール */
   word-break: keep-all;
 }
 
@@ -135,15 +135,15 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
   6. 各セクションの個別スタイル
 ===============================================*/
 /* --- 挨拶セクション --- */
-#greeting .greeting-inner { padding: 40px; }
-#greeting .greeting-message { writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 0.15em; line-height: 2; font-size: 1rem; margin: 20px auto; height: 520px; }
+#greeting .greeting-inner { padding: 40px; text-align: center; }
+#greeting .greeting-message { display: inline-block; writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 0.15em; line-height: 2; font-size: 1rem; margin: 20px auto; height: 520px; text-align: left; }
 #greeting .greeting-date, #greeting .greeting-names { text-align: right; margin-top: 20px; }
 
 /* --- インフォメーション --- */
 .info-item { margin-bottom: 40px; text-align: center; }
 .info-item h3 { color: #b99362; }
 .ps { margin-bottom: 40px; text-align: center; font-size: 0.9rem; }
-.info-item p, .ps p { text-align: center; max-width: 100%; } /* 見切れ防止 */
+.info-item p, .ps p { text-align: center; }
 #map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; border-radius: 8px; overflow: hidden; }
 #map iframe { width: 100%; height: 100%; border:0; }
 
@@ -158,7 +158,6 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 /* --- ギャラリー --- */
 .gallery { overflow: visible; }
 .gallery h2 { margin-bottom: 40px; }
-/* ★★★ 写真の表示を最終修正 ★★★ */
 .slider .slick-slide { display: flex !important; justify-content: center; align-items: center; aspect-ratio: 1 / 1; }
 .slider .slick-slide > div { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 .slider .slick-slide img { width: 100%; height: 100%; object-fit: contain; object-position: center; border-radius: 8px; }
@@ -169,7 +168,7 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .gallery:hover .slick-prev:before, .gallery:hover .slick-next:before { opacity: 1; }
 
 /* --- フォーム --- */
-.rsvp p { text-align: center; max-width: 100%; } /* 見切れ防止 */
+.rsvp p { text-align: center; }
 .rsvp form { max-width: 600px; margin: 0 auto; padding: 0 15px; }
 .form-group { margin-bottom: 25px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #b99362; }
@@ -178,7 +177,7 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .radio-group input[type="radio"]{ margin-right: 5px; }
 button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: #b99362; color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
 button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
-#form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: #544a47; max-width: 100%;} /* 見切れ防止 */
+#form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: #544a47; }
 #form-message.is-show { opacity: 1; }
 
 /* --- フッター --- */
@@ -194,9 +193,13 @@ footer { text-align: center; padding: 40px 20px; background-color: transparent; 
 @media (min-width: 769px) { .site-background { background-image: url('images/waso_background_pc.jpg'); } }
 
 @media (max-width: 768px) {
-  /* ★★★ 挨拶文のSP表示を最終修正 ★★★ */
+  /* ★★★ すべてのテキストの見切れを最終修正 ★★★ */
+  p {
+    max-width: 100%; /* コンテナからはみ出さないようにする */
+  }
+
   #greeting .greeting-inner { padding: 40px 15px; }
-  #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; max-width: 100%;}
+  #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; }
   #greeting .greeting-date, #greeting .greeting-names { text-align: right; }
 
   .ps { font-size: 0.85rem; }

@@ -20,7 +20,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- ★★★ キャッシュ対策：末尾に「?v=final」を追加 ★★★ -->
+    <link rel="stylesheet" href="style.css?v=final">
 </head>
 
 <body>
@@ -47,8 +49,7 @@
       <section id="greeting" data-aos="fade-up">
         <div class="greeting-inner">
           <h2 data-aos="fade-up" data-aos-delay="200">ご挨拶</h2>
-          <!-- ★★★ 厳格な禁則処理を適用 ★★★ -->
-          <p class="greeting-message text-break-strict" data-aos="fade-up" data-aos-delay="300">
+          <p class="greeting-message" data-aos="fade-up" data-aos-delay="300">
             謹啓　晩夏の候<br>
             皆様にはお健やかにお過ごしのことと お慶び申し上げます<br>
             このたび 私たちは結婚式を挙げることになりました<br>
@@ -61,7 +62,7 @@
           <p class="greeting-date" data-aos="fade-up" data-aos-delay="400">
             2025年8月吉日
           </p>
-          <p class="greeting-names text-break-normal" data-aos="fade-up" data-aos-delay="500">
+          <p class="greeting-names" data-aos="fade-up" data-aos-delay="500">
             新郎：野口 晃広　新婦：瑠里奈（旧姓：岡副）
           </p>
         </div>
@@ -71,22 +72,19 @@
         <h2 data-aos="fade-up">INFORMATION</h2>
         <div class="info-item" data-aos="fade-up" data-aos-delay="200">
           <h3>Date</h3>
-          <!-- ★★★ 単語の泣き別れを防ぐ改行ルールを適用 ★★★ -->
-          <p class="text-break-normal">2025年11月8日 (土曜日)</p>
-          <p class="text-break-normal">挙式　　　午後3時00分</p>
-          <p class="text-break-normal">披露宴　　午後3時50分</p>
+          <p>2025年11月8日 (土曜日)</p>
+          <p>挙式　　　午後3時00分</p>
+          <p>披露宴　　午後3時50分</p>
         </div>
         <div class="ps" data-aos="fade-up" data-aos-delay="200">
-          <!-- ★★★ 厳格な禁則処理を適用 ★★★ -->
-          <p class="text-break-strict">ご多用中誠に恐縮に存じますが挙式にもご参列賜りたく<br class="sp-only">
+          <p>ご多用中誠に恐縮に存じますが挙式にもご参列賜りたく<br class="sp-only">
             当日午後2時40分迄にお越しくださいますようにお願い申し上げます</p>
         </div>
         <div class="info-item" data-aos="fade-up" data-aos-delay="300">
           <h3>Location</h3>
-          <!-- ★★★ 単語の泣き別れを防ぐ改行ルールを適用 ★★★ -->
-          <p class="text-break-normal">ストリングスホテル名古屋</p>
-          <p class="text-break-normal">愛知県名古屋市中村区平池町4-60-7</p>
-          <p class="text-break-normal">TEL　(052)589-0588</p>
+          <p>ストリングスホテル名古屋</p>
+          <p>愛知県名古屋市中村区平池町4-60-7</p>
+          <p>TEL　(052)589-0588</p>
           <div id="map">
               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.740093878342!2d136.88126037602362!3d35.16310215826183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600377200924ee6b%3A0x76fb094778b62b42!2z44K544OI44Oq44Oz44Kw44K544Ob44OG44OrIOWQjeWPpOWxiw!5e0!3m2!1sja!2sjp!4v1751796009489!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
@@ -101,8 +99,7 @@
 
       <section id="rsvp" class="rsvp" data-aos="fade-up">
         <h2 data-aos="fade-up">ご返信</h2>
-        <!-- ★★★ 厳格な禁則処理を適用 ★★★ -->
-        <p class="text-break-strict" data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします<br>
+        <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします<br>
          尚 誠に勝手ながら9月25日迄に<br class="sp-only">お返事いただければ幸いに存じます</p>
         <form id="rsvp-form" data-aos="fade-up" data-aos-delay="300">
           <div class="form-group">
