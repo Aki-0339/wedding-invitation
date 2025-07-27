@@ -273,17 +273,6 @@ body.scrolled .hero-inner {
   padding: 0 20px;
 }
 
-/* ★★★ 提案1: #greeting も他のセクションと同じカードスタイルを適用 ★★★ */
-#greeting, .info, .gallery, .rsvp, .countdown {
-  background: #ffffff;
-  border: 1px solid #e0d9d4;
-  border-radius: 10px;
-  margin: 0 auto 40px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
-  position: relative;
-  overflow: hidden;
-}
-
 .greeting-button-section, .info, .gallery, .rsvp, .countdown {
   background: #ffffff;
   border: 1px solid #e0d9d4;
@@ -301,25 +290,149 @@ body.scrolled .hero-inner {
 /*==============================================
   6. 各セクションの個別スタイル
 ===============================================*/
+/* --- 挨拶ボタン --- */
+.hana-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 80px;
+  background-color: #fff;
+  border: 1px solid #b99362;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  z-index: 5;
+  box-shadow: 0 5px 20px rgba(185, 147, 98, 0.1);
+  margin: 0 auto;
+}
 
-/* ★★★ 提案1: 挨拶モーダルとボタンのCSSを削除し、新しい挨拶セクションのスタイルを定義 ★★★ */
-#greeting .greeting-inner {
+.hana-btn:hover {
+  background-color: #fff;
+  border-color: #a07d50;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(185, 147, 98, 0.15);
+}
+
+.hana-btn-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  color: #b99362;
+  letter-spacing: 0.2em;
+}
+
+/* --- 挨拶モーダル --- */
+.shoji-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.shoji-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shoji-panel {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #f5f3f0;
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 5;
+}
+
+#shoji-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.shoji-modal-overlay.is-open #shoji-left {
+  transform: translateX(0);
+}
+
+#shoji-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.shoji-modal-overlay.is-open #shoji-right {
+  transform: translateX(0);
+}
+
+.shoji-main-content {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  height: 90vh;
+  background-color: transparent;
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+}
+
+.shoji-modal-overlay.is-open .shoji-main-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.shoji-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: 15;
+  font-size: 2.5rem;
+  color: #888;
+  text-shadow: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.shoji-close-btn:hover {
+  color: #333;
+}
+
+.greeting-inner {
+  width: 100%;
+  height: 100%;
+  color: #544a47;
+  display: flex;
+  flex-direction: column;
   padding: 40px;
 }
 
-#greeting .greeting-message {
+.greeting-inner h2 {
+  flex-shrink: 0;
+}
+
+.greeting-inner .greeting-message {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   letter-spacing: 0.15em;
   line-height: 2;
   font-size: 1rem;
   margin: 20px auto;
-  height: 520px; /* PCでの縦書きの高さを確保 */
+  overflow-y: auto;
 }
 
-#greeting .greeting-date, #greeting .greeting-names {
-  text-align: right;
+.greeting-inner .greeting-date, .greeting-inner .greeting-names {
+  text-align: left;
   margin-top: 20px;
+  flex-shrink: 0;
 }
 
 /* --- インフォメーション --- */
@@ -398,54 +511,28 @@ body.scrolled .hero-inner {
 }
 
 .slider div {
-  /* 高さを固定せず、アスペクト比で制御 */
-  aspect-ratio: 1 / 1; /* コンテナを常に正方形に保つ */
-  max-height: 70vh;    /* PCなど画面が高い時に、大きくなりすぎないように制限 */
-  margin: 0 auto;
+  height: 60vh;
+  max-height: 500px;
 }
 
 .slider img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* 画像をトリミングせず、コンテナ内に完全に収める */
+  object-fit: cover;
   object-position: center;
+  transition: transform 0.6s ease, filter 0.6s ease;
   cursor: pointer;
   border-radius: 8px;
-  /* 画像が完全にピッタリ収まらなかった場合の背景色を白に指定 */
-  background-color: #ffffff;
 }
-/* ★★★ ここまで差し替え ★★★ */
 
 .slider img:hover {
-  /* ホバーエフェクトはシンプルにするため一旦リセット（お好みで調整可） */
-  transform: none;
-  filter: none;
+  transform: scale(1.05);
+  filter: brightness(1.08);
 }
 
-.slick-prev, 
-.slick-next {
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-}
-.slick-prev {
-  left: -50px; /* 画像の外側左に配置 */
-}
-.slick-next {
-  right: -50px; /* 画像の外側右に配置 */
-}
-.slick-prev:before, 
-.slick-next:before {
-  color: rgba(84, 74, 71, 0.7);
-  font-size: 40px;
-  opacity: 0.5;
-  transition: opacity 0.3s;
-}
-.gallery:hover .slick-prev:before,
-.gallery:hover .slick-next:before {
-  opacity: 1;
+.slick-prev:before, .slick-next:before {
+  color: rgba(84, 74, 71, 0.5);
+  font-size: 30px;
 }
 
 .rsvp p {
@@ -561,19 +648,18 @@ p {
 }
 
 @media (max-width: 768px) {
-  /* ★★★ 提案1: 新しい挨拶セクションのSP対応 ★★★ */
-  #greeting .greeting-inner {
+  .greeting-inner {
     padding: 40px 15px;
   }
-  #greeting .greeting-message {
-    writing-mode: horizontal-tb; /* 横書きに変更 */
+  .greeting-inner .greeting-message {
+    writing-mode: horizontal-tb;
     text-align: left;
-    height: auto; /* 高さを自動に */
+    height: auto;
     margin: 30px auto;
     line-height: 2.2;
   }
-  #greeting .greeting-date,
-  #greeting .greeting-names {
+  .greeting-inner .greeting-date,
+  .greeting-inner .greeting-names {
     text-align: right;
   }
 

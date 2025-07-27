@@ -4,18 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Akihiro & Rurina's Wedding Invitation</title>
-    
-    <!-- ★★★ 提案3A: OGP設定（SNSシェア時の見栄え）を追加 ★★★ -->
-    <!-- ※ このWeb招待状の最終的なURLに書き換えてください -->
-    <meta property="og:url" content="https://aki-0339.github.io/wedding-invitation/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Akihiro & Rurina's Wedding Invitation">
-    <meta property="og:description" content="このたび 私たちは結婚式を挙げることになりました 皆様にお会いできることを心より楽しみにしております">
-    <!-- ※ SNSでシェアした際に表示される画像です。1200x630pxの画像を用意し、そのパスを指定してください -->
-    <meta property="og:image" content="https://aki-0339.github.io/wedding-invitation/images/ogp_image.jpg">
-    <meta property="og:site_name" content="Akihiro & Rurina's Wedding">
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- ★★★ OGP設定ここまで ★★★ -->
       
     <!-- Google Fonts: IBM Plex Serif と Noto Serif JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,28 +50,42 @@
   =================================== -->
   <div class="wrapper">
     <main>
-      <!-- ★★★ 提案1: 挨拶セクションをモーダルからページ内に統合 ★★★ -->
-      <section id="greeting" data-aos="fade-up">
-        <div class="greeting-inner">
-          <h2 data-aos="fade-up" data-aos-delay="200">ご挨拶</h2>
-          <p class="greeting-message" data-aos="fade-up" data-aos-delay="300">
-            謹啓　晩夏の候<br>
-            皆様にはお健やかにお過ごしのことと お慶び申し上げます<br>
-            このたび 私たちは結婚式を挙げることになりました<br>
-            つきましては 日頃お世話になっております<br>
-            皆様方をお招きして ささやかな披露の宴を催したく存じます<br>
-            ご多用中誠におそれいりますが<br>
-            何卒ご出席くださいますようお願い申し上げます<br>
-            　　　　　　　　　　　　　　　　　　　　　　　　　　謹白
-          </p>
-          <p class="greeting-date" data-aos="fade-up" data-aos-delay="400">
-            2025年8月吉日
-          </p>
-          <p class="greeting-names" data-aos="fade-up" data-aos-delay="500">
-            新郎：野口 晃広　新婦：瑠里奈（旧姓：岡副）
-          </p>
+      <!-- ==================================
+      4. 挨拶セクション（ボタンとモーダル）
+      =================================== -->
+      <section id="greeting" class="greeting-button-section" data-aos="fade-up">
+        <button id="greeting-open-btn" class="hana-btn">
+          <span class="hana-btn-text">ご挨拶</span>
+        </button>
+      </section>
+
+      <div id="greeting-modal" class="shoji-modal-overlay">
+        <div id="shoji-left" class="shoji-panel"></div>
+        <div class="shoji-main-content">
+          <button id="modal-close-btn" class="shoji-close-btn">×</button>
+          <div class="greeting-inner">
+            <h2 data-aos="fade-up" data-aos-delay="500">ご挨拶</h2>
+            <p class="greeting-message" data-aos="fade-up" data-aos-delay="600">
+              謹啓　晩夏の候<br>
+              皆様にはお健やかにお過ごしのことと お慶び申し上げます<br>
+              このたび 私たちは結婚式を挙げることになりました<br>
+              つきましては 日頃お世話になっております<br>
+              皆様方をお招きして ささやかな披露の宴を催したく存じます<br>
+              ご多用中誠におそれいりますが<br>
+              何卒ご出席くださいますようお願い申し上げます<br>
+              　　　　　　　　　　　　　　　　　　　　　　　　　　謹白
+            </p>
+            <p class="greeting-date" data-aos="fade-up" data-aos-delay="700">
+              2025年8月吉日
+            </p>
+            <p class="greeting-names" data-aos="fade-up" data-aos-delay="800">
+              新郎：野口 晃広　新婦：瑠里奈（旧姓：岡副）
+            </p>
+          </div>
         </div>
-      </section>      
+        <div id="shoji-right" class="shoji-panel"></div>
+      </div>
+      
       <!-- ==================================
       5. インフォメーションセクション
       =================================== -->
@@ -155,18 +157,9 @@
       <section id="gallery" class="gallery" data-aos="fade-up">
         <h2 data-aos="fade-up">GALLERY</h2>
         <div class="slider" data-aos="fade-up" data-aos-delay="200">
-          <!-- ★★★ 提案3B: 画像の遅延読み込みを追加 ★★★ -->
-          <div><img src="images/galary1.jpg" alt="ギャラリー写真1" loading="lazy"></div>
-          <div><img src="images/galary2.jpg" alt="ギャラリー写真2" loading="lazy"></div>
-          <div><img src="images/galary3.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary4.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary5.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary6.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary7.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary8.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary9.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary10.jpg" alt="ギャラリー写真3" loading="lazy"></div>
-          <div><img src="images/galary11.jpg" alt="ギャラリー写真3" loading="lazy"></div>
+          <div><img src="images/galary1.jpg" alt="ギャラリー写真1"></div>
+          <div><img src="images/galary2.jpg" alt="ギャラリー写真2"></div>
+          <div><img src="images/galary3.jpg" alt="ギャラリー写真3"></div>
         </div>
       </section>
 

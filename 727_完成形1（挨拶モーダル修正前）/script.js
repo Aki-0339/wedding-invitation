@@ -43,6 +43,46 @@
 }
 
 // ==================================
+// 3. 挨拶モーダル（障子演出）
+// ==================================
+{
+  const modal = document.getElementById('greeting-modal');
+  const openBtn = document.getElementById('greeting-open-btn');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const greetingSection = document.getElementById('greeting'); 
+  
+  const openModal = () => {
+    modal.classList.add('is-open');
+    setTimeout(() => AOS.refresh(), 500);
+  };
+  
+  const closeModal = () => {
+    modal.classList.remove('is-open');
+  };
+  
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  let hasBeenShown = sessionStorage.getItem('greetingModalShown');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasBeenShown) {
+        setTimeout(openModal, 500);
+        hasBeenShown = true;
+        sessionStorage.setItem('greetingModalShown', 'true');
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+  observer.observe(greetingSection);
+}
+
+// ==================================
 // 4. カウントダウンタイマー
 // ==================================
 {
