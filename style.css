@@ -1,11 +1,15 @@
 /*==============================================
   1. リセット & 基本設定
 ===============================================*/
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
-  /* ★ 問題5対策: スマホ表示時に基準の文字サイズを少し小さくする */
-  @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+  html {
     font-size: 93.75%; /* 16px * 0.9375 = 15px */
   }
 }
@@ -13,23 +17,35 @@ html {
 body {
   margin: 0;
   font-family: 'IBM Plex Serif', 'Noto Serif JP', serif;
-  /* ★ 提案1: 基本の文字色を読みやすいダークブラウンに変更 */
   color: #544a47;
   line-height: 1.8;
-  /* ★ 提案1: 背景色を温かみのあるオフホワイトに変更 */
   background-color: #f5f3f0;
   overflow-x: hidden;
 }
 
-img { max-width: 100%; height: auto; vertical-align: bottom; }
-h1, h2, h3 { font-family: 'IBM Plex Serif', serif; font-weight: 700; margin-top: 0; margin-bottom: 20px; text-align: center; }
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+h1, h2, h3 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 h2 {
   font-size: 2.5rem;
-  /* ★ 提案1: 見出しの色をテーマに合わせた落ち着いたゴールド系に変更 */
   color: #b99362;
-  text-shadow: none; /* 影をリセットしシンプルに */
+  text-shadow: none;
 }
-section { padding: 40px 20px; }
+
+section {
+  padding: 40px 20px;
+}
 
 /*==============================================
   2. ページ全体の重なり順（z-index）の設計
@@ -39,126 +55,370 @@ section { padding: 40px 20px; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* 高さはシンプルに100%に */
+  height: 100%;
   background-image: url('images/waso_background_sp.jpg');
   background-size: cover;
   background-position: center;
-  /* ★ 問題2解決: 背景画像をビューポートに固定し、スクロール時のズームを完全に防ぐ */
   background-attachment: fixed;
   z-index: -1;
   filter: brightness(0.9) contrast(1.1);
   transition: opacity 1s ease-out, filter 1s ease-out;
 }
+
 body.scrolled .site-background {
-  opacity: 0.7; /* スクロールしても透明度を保ち、世界観を維持 */
+  opacity: 0.7;
   filter: brightness(0.8) contrast(1.1);
 }
-.momiji-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-.hero, .wrapper, footer { position: relative; z-index: 2; }
-.shoji-modal-overlay { z-index: 10000; }
-#loading { z-index: 99999; }
+
+.momiji-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero, .wrapper, footer {
+  position: relative;
+  z-index: 2;
+}
+
+.shoji-modal-overlay {
+  z-index: 10000;
+}
+
+#loading {
+  z-index: 99999;
+}
 
 /*==============================================
   3. 舞い散る木の葉のアニメーション
 ===============================================*/
-.momiji { position: absolute; top: -10%; opacity: 0; user-select: none; width: 30px; height: 30px; background-size: contain; background-repeat: no-repeat; background-position: center; animation-iteration-count: infinite; filter: brightness(1.1) saturate(1.2); }
+.momiji {
+  position: absolute;
+  top: -10%;
+  opacity: 0;
+  user-select: none;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation-iteration-count: infinite;
+  filter: brightness(1.1) saturate(1.2);
+}
+
 .momiji[data-leaf="1"] { background-image: url('images/momiji-illust_brown.png'); }
 .momiji[data-leaf="2"] { background-image: url('images/momiji-illust_green.png'); }
 .momiji[data-leaf="3"] { background-image: url('images/momiji-illust_red.png'); }
 
-/* ★ 提案4: 3種類の動きでより自然な舞い方を表現 */
-@keyframes fall { from { transform: translateY(-10vh) translateX(0px) rotate(0deg); opacity: 0; } to { transform: translateY(110vh) translateX(20px) rotate(360deg); opacity: 1; } }
-@keyframes sway-left { from { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; } to { transform: translateY(110vh) translateX(-200px) rotate(720deg); opacity: 1; } }
-@keyframes sway-right-fast { from { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; } to { transform: translateY(110vh) translateX(150px) rotate(1080deg); opacity: 1; } }
+@keyframes fall {
+  from { transform: translateY(-10vh) translateX(0px) rotate(0deg); opacity: 0; }
+  to { transform: translateY(110vh) translateX(20px) rotate(360deg); opacity: 1; }
+}
+@keyframes sway-left {
+  from { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; }
+  to { transform: translateY(110vh) translateX(-200px) rotate(720deg); opacity: 1; }
+}
+@keyframes sway-right-fast {
+  from { transform: translateY(-10vh) translateX(0) rotate(0); opacity: 0; }
+  to { transform: translateY(110vh) translateX(150px) rotate(1080deg); opacity: 1; }
+}
 
 .momiji:nth-child(3n + 1) { animation-name: fall; animation-timing-function: ease-in-out; }
 .momiji:nth-child(3n + 2) { animation-name: sway-left; animation-timing-function: linear; }
 .momiji:nth-child(3n) { animation-name: sway-right-fast; animation-timing-function: ease-out; }
-/* (個別設定は変更なし・省略) */
-.momiji:nth-child(1) { left: 5%; width: 25px; height: 25px; animation-duration: 40s; animation-delay: -8s; } .momiji:nth-child(2) { left: 10%; width: 40px; height: 40px; animation-duration: 32s; animation-delay: -18s; } .momiji:nth-child(3) { left: 15%; width: 30px; height: 30px; animation-duration: 50s; animation-delay: -1s; } .momiji:nth-child(4) { left: 20%; width: 22px; height: 22px; animation-duration: 20s; animation-delay: -8s; } .momiji:nth-child(5) { left: 25%; width: 28px; height: 28px; animation-duration: 60s; animation-delay: -20s; } .momiji:nth-child(6) { left: 30%; width: 18px; height: 18px; animation-duration: 21s; animation-delay: -10s; } .momiji:nth-child(7) { left: 35%; width: 32px; height: 32px; animation-duration: 48s; animation-delay: -4s; } .momiji:nth-child(8) { left: 40%; width: 24px; height: 24px; animation-duration: 42s; animation-delay: -31s; } .momiji:nth-child(9) { left: 45%; width: 29px; height: 29px; animation-duration: 25s; animation-delay: -2s; } .momiji:nth-child(10) { left: 50%; width: 40px; height: 40px; animation-duration: 14s; animation-delay: -18s; } .momiji:nth-child(11) { left: 55%; width: 25px; height: 25px; animation-duration: 70s; animation-delay: -9s; } .momiji:nth-child(12) { left: 60%; width: 30px; height: 30px; animation-duration: 21s; animation-delay: -1s; } .momiji:nth-child(13) { left: 65%; width: 22px; height: 22px; animation-duration: 40s; animation-delay: -4s; } .momiji:nth-child(14) { left: 70%; width: 28px; height: 28px; animation-duration: 51s; animation-delay: -11s; } .momiji:nth-child(15) { left: 75%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: -3s; } .momiji:nth-child(16) { left: 80%; width: 32px; height: 32px; animation-duration: 39s; animation-delay: -26s; } .momiji:nth-child(17) { left: 85%; width: 24px; height: 24px; animation-duration: 43s; animation-delay: -8s; } .momiji:nth-child(18) { left: 90%; width: 29px; height: 29px; animation-duration: 24s; animation-delay: -18s; } .momiji:nth-child(19) { left: 95%; width: 40px; height: 40px; animation-duration: 52s; animation-delay: -5s; } .momiji:nth-child(20) { left: 2%; width: 30px; height: 30px; animation-duration: 47s; animation-delay: -12s; }
+
+.momiji:nth-child(1) { left: 5%; width: 25px; height: 25px; animation-duration: 40s; animation-delay: -8s; }
+.momiji:nth-child(2) { left: 10%; width: 40px; height: 40px; animation-duration: 32s; animation-delay: -18s; }
+.momiji:nth-child(3) { left: 15%; width: 30px; height: 30px; animation-duration: 50s; animation-delay: -1s; }
+.momiji:nth-child(4) { left: 20%; width: 22px; height: 22px; animation-duration: 20s; animation-delay: -8s; }
+.momiji:nth-child(5) { left: 25%; width: 28px; height: 28px; animation-duration: 60s; animation-delay: -20s; }
+.momiji:nth-child(6) { left: 30%; width: 18px; height: 18px; animation-duration: 21s; animation-delay: -10s; }
+.momiji:nth-child(7) { left: 35%; width: 32px; height: 32px; animation-duration: 48s; animation-delay: -4s; }
+.momiji:nth-child(8) { left: 40%; width: 24px; height: 24px; animation-duration: 42s; animation-delay: -31s; }
+.momiji:nth-child(9) { left: 45%; width: 29px; height: 29px; animation-duration: 25s; animation-delay: -2s; }
+.momiji:nth-child(10) { left: 50%; width: 40px; height: 40px; animation-duration: 14s; animation-delay: -18s; }
+.momiji:nth-child(11) { left: 55%; width: 25px; height: 25px; animation-duration: 70s; animation-delay: -9s; }
+.momiji:nth-child(12) { left: 60%; width: 30px; height: 30px; animation-duration: 21s; animation-delay: -1s; }
+.momiji:nth-child(13) { left: 65%; width: 22px; height: 22px; animation-duration: 40s; animation-delay: -4s; }
+.momiji:nth-child(14) { left: 70%; width: 28px; height: 28px; animation-duration: 51s; animation-delay: -11s; }
+.momiji:nth-child(15) { left: 75%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: -3s; }
+.momiji:nth-child(16) { left: 80%; width: 32px; height: 32px; animation-duration: 39s; animation-delay: -26s; }
+.momiji:nth-child(17) { left: 85%; width: 24px; height: 24px; animation-duration: 43s; animation-delay: -8s; }
+.momiji:nth-child(18) { left: 90%; width: 29px; height: 29px; animation-duration: 24s; animation-delay: -18s; }
+.momiji:nth-child(19) { left: 95%; width: 40px; height: 40px; animation-duration: 52s; animation-delay: -5s; }
+.momiji:nth-child(20) { left: 2%; width: 30px; height: 30px; animation-duration: 47s; animation-delay: -12s; }
 
 /*==============================================
   4. ローディング & ヒーロー
 ===============================================*/
-#loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #f5f3f0; display: flex; justify-content: center; align-items: center; opacity: 1; visibility: visible; transition: opacity 2s, visibility 2s; }
-.loading-logo { font-family: 'IBM Plex Serif', serif; font-size: 1.5rem; color: #b99362; letter-spacing: 0.1em; opacity: 0; transform: translateY(20px); transition: opacity 1.5s ease-out, transform 1.5s ease-out; }
-.loading-logo.is-show { opacity: 1; transform: translateY(0); }
-body.loaded #loading { opacity: 0; visibility: hidden; }
-.hero, .wrapper { opacity: 0; transition: opacity 2s ease-in-out; }
-body.loaded .hero, body.loaded .wrapper { opacity: 1; }
-
-.hero { 
-  /* ★ 提案2: 高さを調整し、コンテンツの存在を示唆 */
-  height: 90vh; 
-  min-height: 600px;
-  display: flex; justify-content: center; align-items: center; text-align: center; color: white; background-color: transparent; 
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f3f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 2s, visibility 2s;
 }
-.hero-inner { padding: 40px; }
+
+.loading-logo {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 1.5rem;
+  color: #b99362;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.loading-logo.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.loaded #loading {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hero, .wrapper {
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+body.loaded .hero, body.loaded .wrapper {
+  opacity: 1;
+}
+
+.hero {
+  height: 90vh;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+}
+
+.hero-inner {
+  padding: 40px;
+}
+
 .hero h1 {
-  font-size: 3.2rem; /* PCでの基本サイズを少し調整 */
+  /* 画面幅375pxのとき約2.4rem、1200pxのとき3.2remになるよう自動調整 */
+  font-size: clamp(2.4rem, 0.9rem + 4vw, 3.2rem);
   color: #fff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 0 5px rgba(255, 255, 255, 0.2);
-  /* ★ 問題4解決: 文字列の折り返しを絶対に禁止する */
   white-space: nowrap;
 }
-.hero p, .hero .hero-date { color: #f0f0f0; text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8); }
-body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacity 0.5s; }
 
-/* ★ 提案2: スクロールダウンアイコンのスタイル */
-.scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: white; font-size: 0.8rem; letter-spacing: 0.1em; text-shadow: 0 1px 3px rgba(0,0,0,0.5); writing-mode: vertical-rl; padding-bottom: 30px; }
-.scroll-down::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 1px; height: 20px; background: #fff; animation: scroll-down-anim 2.5s infinite; }
-@keyframes scroll-down-anim { 0% { height: 0; opacity: 0; } 50% { height: 20px; opacity: 1; } 100% { height: 0; opacity: 0; transform: translateY(20px); } }
+.hero p, .hero .hero-date {
+  color: #f0f0f0;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+body.scrolled .hero-inner {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  writing-mode: vertical-rl;
+  padding-bottom: 30px;
+}
+
+.scroll-down::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 20px;
+  background: #fff;
+  animation: scroll-down-anim 2.5s infinite;
+}
+
+@keyframes scroll-down-anim {
+  0% { height: 0; opacity: 0; }
+  50% { height: 20px; opacity: 1; }
+  100% { height: 0; opacity: 0; transform: translateY(20px); }
+}
 
 /*==============================================
   5. メインコンテンツ (.wrapper)
 ===============================================*/
-.wrapper { max-width: 900px; margin: 0 auto; overflow: hidden; padding: 0 20px; }
+.wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
 .greeting-button-section, .info, .gallery, .rsvp, .countdown {
-  /* ★ 提案1: オーロラ背景を廃止し、和紙のような質感の白背景に変更 */
   background: #ffffff;
-  /* background-image: url('path/to/washi-texture.png'); 和紙テクスチャを使いたい場合 */
   border: 1px solid #e0d9d4;
   border-radius: 10px;
-  margin: 0 auto 40px; /* ★ 左右のマージンをautoにして中央揃え */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08); /* 影を柔らかく */
+  margin: 0 auto 40px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
 }
-.wrapper > main > section:first-child { margin-top: 40px; }
+
+.wrapper > main > section:first-child {
+  margin-top: 40px;
+}
 
 /*==============================================
   6. 各セクションの個別スタイル
 ===============================================*/
 /* --- 挨拶ボタン --- */
-.hana-btn { display: flex; align-items: center; justify-content: center; width: 280px; height: 80px; background-color: #fff; border: 1px solid #b99362; border-radius: 40px; cursor: pointer; transition: all 0.4s ease; z-index: 5; box-shadow: 0 5px 20px rgba(185, 147, 98, 0.1); margin: 0 auto; }
-.hana-btn:hover { background-color: #fff; border-color: #a07d50; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(185, 147, 98, 0.15); }
-.hana-btn-text { font-family: 'Noto Serif JP', serif; font-size: 1.2rem; color: #b99362; letter-spacing: 0.2em; }
+.hana-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 80px;
+  background-color: #fff;
+  border: 1px solid #b99362;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  z-index: 5;
+  box-shadow: 0 5px 20px rgba(185, 147, 98, 0.1);
+  margin: 0 auto;
+}
+
+.hana-btn:hover {
+  background-color: #fff;
+  border-color: #a07d50;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(185, 147, 98, 0.15);
+}
+
+.hana-btn-text {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.2rem;
+  color: #b99362;
+  letter-spacing: 0.2em;
+}
 
 /* --- 挨拶モーダル --- */
-.shoji-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 10000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: opacity 0.5s, visibility 0.5s; }
-.shoji-modal-overlay.is-open { opacity: 1; visibility: visible; }
-.shoji-panel { position: absolute; top: 0; width: 50%; height: 100%; background-color: #f5f3f0; /* ★ 背景色と統一 */ transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1); z-index: 5; }
-#shoji-left { left: 0; transform: translateX(-100%); }
-.shoji-modal-overlay.is-open #shoji-left { transform: translateX(0); }
-#shoji-right { right: 0; transform: translateX(100%); }
-.shoji-modal-overlay.is-open #shoji-right { transform: translateX(0); }
-.shoji-main-content { position: relative; width: 90%; max-width: 600px; height: 90vh; background-color: transparent; z-index: 10; opacity: 0; transform: scale(0.95); transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s; }
-.shoji-modal-overlay.is-open .shoji-main-content { opacity: 1; transform: scale(1); }
-.greeting-inner { width: 100%; height: 100%; overflow-y: auto; padding: 50px 40px; color: #544a47; /* ★ 文字色を統一 */ }
-.shoji-close-btn { position: absolute; top: 15px; right: 20px; z-index: 15; font-size: 2.5rem; color: #888; text-shadow: none; background: none; border: none; cursor: pointer; transition: color 0.3s; }
-.shoji-close-btn:hover { color: #333; }
+.shoji-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.shoji-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shoji-panel {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #f5f3f0;
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 5;
+}
+
+#shoji-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.shoji-modal-overlay.is-open #shoji-left {
+  transform: translateX(0);
+}
+
+#shoji-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.shoji-modal-overlay.is-open #shoji-right {
+  transform: translateX(0);
+}
+
+.shoji-main-content {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  height: 90vh;
+  background-color: transparent;
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+}
+
+.shoji-modal-overlay.is-open .shoji-main-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.shoji-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  z-index: 15;
+  font-size: 2.5rem;
+  color: #888;
+  text-shadow: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.shoji-close-btn:hover {
+  color: #333;
+}
+
 .greeting-inner {
   width: 100%;
   height: 100%;
   color: #544a47;
-  /* ★ 問題2対策: フレックスボックスで内部コンテンツを制御 */
   display: flex;
   flex-direction: column;
   padding: 40px;
 }
+
 .greeting-inner h2 {
-  flex-shrink: 0; /* 見出しは縮まないようにする */
+  flex-shrink: 0;
 }
+
 .greeting-inner .greeting-message {
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -166,47 +426,178 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
   line-height: 2;
   font-size: 1rem;
   margin: 20px auto;
-  /* ★ 問題2対策: 高さを固定せず、フレックスアイテムとして伸縮するように */
-  overflow-y: auto; /* 内容が多い場合はここがスクロールする */
+  overflow-y: auto;
 }
+
 .greeting-inner .greeting-date, .greeting-inner .greeting-names {
   text-align: left;
   margin-top: 20px;
-  flex-shrink: 0; /* 日付や名前も縮まない */
+  flex-shrink: 0;
 }
 
 /* --- インフォメーション --- */
-.info-item { margin-bottom: 40px; text-align: center; }
-.info-item h3 { color: #b99362; }
-.ps { margin-bottom: 40px; text-align: center; font-size: 0.8rem; opacity: 0.8; }
-#map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; border-radius: 8px; overflow: hidden; }
-#map iframe { width: 100%; height: 100%; border:0; }
+.info-item {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.info-item h3 {
+  color: #b99362;
+}
+
+.ps {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+#map {
+  max-width: 800px;
+  width: 95%;
+  height: 400px;
+  margin: 20px auto 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#map iframe {
+  width: 100%;
+  height: 100%;
+  border:0;
+}
 
 /* --- カウントダウン --- */
-.countdown { padding: 60px 20px; }
-.countdown p { text-align: center; }
-#countdown-timer { display: flex; justify-content: center; align-items: baseline; gap: 20px; margin-top: 30px; flex-wrap: wrap;}
-.timer-unit { text-align: center; }
-.timer-value { font-size: 4rem; font-weight: bold; font-family: 'IBM Plex Serif', serif; line-height: 1; color: #b99362; }
-.timer-label { font-size: 1rem; font-family: 'Noto Serif JP', serif; letter-spacing: 1px; color: #544a47; opacity: 0.8; }
+.countdown {
+  padding: 60px 20px;
+}
+
+.countdown p {
+  text-align: center;
+}
+
+#countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 20px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.timer-unit {
+  text-align: center;
+}
+
+.timer-value {
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'IBM Plex Serif', serif;
+  line-height: 1;
+  color: #b99362;
+}
+
+.timer-label {
+  font-size: 1rem;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 1px;
+  color: #544a47;
+  opacity: 0.8;
+}
 
 /* --- ギャラリー＆フォーム＆フッター --- */
-.gallery h2 { margin-bottom: 40px; }
-.slider div { height: 60vh; max-height: 500px; }
-.slider img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.6s ease, filter 0.6s ease; cursor: pointer; border-radius: 8px; }
-.slider img:hover { transform: scale(1.05); filter: brightness(1.08); }
-.slick-prev:before, .slick-next:before { color: rgba(84, 74, 71, 0.5); font-size: 30px; } /* ★ 矢印の色を調整 */
-.rsvp p { text-align: center; }
-.rsvp form { max-width: 600px; margin: 0 auto; padding: 0 15px; }
-.form-group { margin-bottom: 25px; }
-.form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #b99362; }
-.form-group input[type="text"], .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: 'Noto Serif JP', serif; font-size: 1rem; background-color: #fdfdfd; }
-.radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; }
-.radio-group input[type="radio"]{ margin-right: 5px; }
-button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: #b99362; color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
+.gallery h2 {
+  margin-bottom: 40px;
+}
 
-/* ★ 提案5: フォーム送信後メッセージのスタイル */
+.slider div {
+  height: 60vh;
+  max-height: 500px;
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease, filter 0.6s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.slider img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.08);
+}
+
+.slick-prev:before, .slick-next:before {
+  color: rgba(84, 74, 71, 0.5);
+  font-size: 30px;
+}
+
+.rsvp p {
+  text-align: center;
+}
+
+.rsvp form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #b99362;
+}
+
+.form-group input[type="text"], .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1rem;
+  background-color: #fdfdfd;
+}
+
+.radio-group label {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: normal;
+}
+
+.radio-group input[type="radio"]{
+  margin-right: 5px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #b99362;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"]:hover {
+  background-color: #a07d50;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
 #form-message {
   text-align: center;
   font-size: 1rem;
@@ -217,25 +608,33 @@ button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-
   white-space: pre-wrap;
   color: #544a47;
   line-height: 2;
-  /* ★ 問題1&3解決: スマートな改行処理で、見切れと不自然な改行を両方防ぐ */
   overflow-wrap: break-word;
 }
-#form-message.is-show { opacity: 1; }
 
-footer { text-align: center; padding: 40px 20px; background-color: transparent; color: #544a47; opacity: 0.7; font-family: 'IBM Plex Serif', serif; }
+#form-message.is-show {
+  opacity: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: transparent;
+  color: #544a47;
+  opacity: 0.7;
+  font-family: 'IBM Plex Serif', serif;
+}
 
 p {
   word-break: keep-all;
 }
 
-/* アプローチ2: スマートフォン表示の時だけ有効になる改行タグ用のクラス */
 .sp-only {
-  display: none; /* PCでは表示しない */
+  display: none;
 }
 
 @media (max-width: 768px) {
   .sp-only {
-    display: block; /* スマートフォン（768px以下）では表示する */
+    display: block;
   }
 }
 
@@ -243,22 +642,17 @@ p {
   7. レスポンシブ対応
 ===============================================*/
 @media (min-width: 769px) {
-  .site-background { background-image: url('images/waso_background_pc.jpg'); }
+  .site-background {
+    background-image: url('images/waso_background_pc.jpg');
+  }
 }
 
-/* ★ 提案3: 挨拶モーダルのレスポンシブ対応 */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.8rem; }
-  
-  @media (max-width: 375px) {
-    .hero h1 {
-      font-size: 2.4rem;
-    }
+  .greeting-inner {
+    padding: 40px 15px;
   }
-  
-  .greeting-inner { padding: 40px 15px; }
   .greeting-inner .greeting-message {
-    writing-mode: horizontal-tb; /* 横書きに変更 */
+    writing-mode: horizontal-tb;
     text-align: left;
     height: auto;
     margin: 30px auto;
@@ -266,17 +660,18 @@ p {
   }
   .greeting-inner .greeting-date,
   .greeting-inner .greeting-names {
-    text-align: right; /* 日付と名前は右寄せに */
+    text-align: right;
   }
+
   #countdown-timer {
-    gap: 15px; /* ★ 隙間を少し詰める */
-    row-gap: 25px; /* ★ 折り返した際の上下の隙間を確保 */
+    gap: 15px;
+    row-gap: 25px;
   }
   .timer-value {
-    font-size: 3rem; /* ★ 数字のサイズを少し調整 */
+    font-size: 3rem;
   }
   .timer-label {
-    font-size: 0.75rem; /* ★ ラベルのサイズも調整 */
-    letter-spacing: 0; /* ★ 文字間を詰める */
+    font-size: 0.75rem;
+    letter-spacing: 0;
   }
 }
