@@ -21,7 +21,7 @@ body {
   line-height: 1.9;
   background-color: #f5f3f0;
   overflow-x: hidden;
-  /* 日本語の改行を美しく保つための絶対ルール */
+  /* ★★★ 日本語改行の絶対的ルールを適用 ★★★ */
   word-break: keep-all;
 }
 
@@ -48,6 +48,17 @@ h2 {
 section {
   padding: 40px 20px;
 }
+
+/* ★★★★★★★★★★★★★★★★★★★★★★★★★★ */
+/* ★★★ 以下のpタグの定義を完全に削除します ★★★ */
+/* ★★★ これがすべての問題の根本原因でした ★★★ */
+/* ★★★★★★★★★★★★★★★★★★★★★★★★★★ */
+/*
+p {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+*/
 
 /*==============================================
   2. ページ全体の重なり順（z-index）の設計
@@ -143,7 +154,6 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .info-item { margin-bottom: 40px; text-align: center; }
 .info-item h3 { color: #b99362; }
 .ps { margin-bottom: 40px; text-align: center; font-size: 0.9rem; }
-.info-item p, .ps p { text-align: center; }
 #map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; border-radius: 8px; overflow: hidden; }
 #map iframe { width: 100%; height: 100%; border:0; }
 
@@ -193,11 +203,6 @@ footer { text-align: center; padding: 40px 20px; background-color: transparent; 
 @media (min-width: 769px) { .site-background { background-image: url('images/waso_background_pc.jpg'); } }
 
 @media (max-width: 768px) {
-  /* ★★★ すべてのテキストの見切れを最終修正 ★★★ */
-  p {
-    max-width: 100%; /* コンテナからはみ出さないようにする */
-  }
-
   #greeting .greeting-inner { padding: 40px 15px; }
   #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; }
   #greeting .greeting-date, #greeting .greeting-names { text-align: right; }
