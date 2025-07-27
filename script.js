@@ -125,15 +125,15 @@
         let messageText = '';
 
         if (attendanceValue === '出席') {
-          messageText = 'ご多用の中 ご出席とのご返事をいただき\n誠にありがとうございます\n当日お会いできることを心より楽しみにしております';
+          messageText = 'ご多用の中 ご出席とのご返事をいただき\n誠にありがとうございます\n当日お会いできることを\n心より楽しみにしております';
           
           const receptionList = ['山田', '山内', '受付'];
           const familyList = ['野口', '岡副', '親族'];
 
           if (receptionList.some(receptionName => nameValue.includes(receptionName))) {
-            messageText += '\n\n誠に恐れ入りますが 私共の受付係をお願いいたしたく存じますので\n当日は午後1時45分迄にお越しくださいますようお願い申し上げます';
+            messageText += '\n\n誠に恐れ入りますが 私共の受付係をお願いいたしたく存じますので\n当日は午後1時45分迄に\nお越しくださいますようお願い申し上げます';
           } else if (familyList.some(familyName => nameValue.includes(familyName))) {
-             messageText += '\n\n誠に恐縮に存じますが 親族紹介にもご列席賜りたく\n当日午後2時10分迄にお越しくださいますようお願い申し上げます';
+             messageText += '\n\n誠に恐縮に存じますが 親族紹介にもご列席賜りたく\n当日午後2時10分迄に\nお越しくださいますようお願い申し上げます';
           }
 
         } else {
