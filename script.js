@@ -205,7 +205,7 @@
     const form = document.getElementById('rsvp-form');
     if (form) {
         const formMessage = document.getElementById('form-message');
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3A3_92ekWk0KJdHEklUR4vuM3NLaSxWGOWG8CCaxFNoZPt4XuJ0bLaHrTguuUAOv7/exec';
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbzWKANAxSa7tw5PXw_EXVupYMV3wm2dYRH8t3zZg9dElJCOBZD71oHZ1NLmwquTw9s2/exec';
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
