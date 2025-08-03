@@ -30,6 +30,9 @@ body {
     overflow-x: hidden;
     word-break: keep-all;
     position: relative;
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; /* iOSでの慣性スクロールを有効に */
 }
 
 body::before {
@@ -46,6 +49,7 @@ body::before {
     z-index: -1;
     transition: opacity 1s ease-out, filter 1s ease-out;
     filter: brightness(0.9) contrast(1.1);
+    transform: translateZ(0); /* これでハードウェアアクセラレーションが効く */
 }
 @media (min-width: 769px) {
     body::before {
