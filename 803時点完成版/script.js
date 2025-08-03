@@ -23,9 +23,11 @@
         const initialView = document.getElementById('rsvp-initial-view');
         const omotenashiView = document.getElementById('rsvp-omotenashi-view');
 
+        // Hide form and show Omotenashi view
         initialView.style.display = 'none';
         omotenashiView.style.display = 'block';
 
+        // Get dynamic elements
         const mainMessage = omotenashiView.querySelector('.omotenashi-main-message');
         const attendanceSpan = omotenashiView.querySelector('.status-attendance');
         const infoGuest = omotenashiView.querySelector('.info-guest');
@@ -36,6 +38,7 @@
         const shortcuts = omotenashiView.querySelector('.omotenashi-shortcuts');
         const contact = omotenashiView.querySelector('.omotenashi-contact');
 
+        // 1. Display attendance status
         if (status.attendance === '出席') {
             attendanceSpan.textContent = 'ご出席';
             attendanceSpan.classList.add('attending');
@@ -46,6 +49,7 @@
             mainMessage.textContent = 'ご丁寧にご連絡いただきありがとうございます';
         }
 
+        // 2. Display personalized info based on role and attendance
         infoGuest.style.display = 'none';
         infoReception.style.display = 'none';
         infoFamily.style.display = 'none';
@@ -77,8 +81,10 @@
                 <a href="#greeting" class="shortcut-btn">メッセージをもう一度読む</a>
             `;
             contact.innerHTML = '';
+            resetButtonWrapper.style.display = 'none';
         }
 
+        // ★★★ 回答修正用リンクのイベントリスナーを追加 ★★★
         const resetButton = document.getElementById('reset-rsvp-btn');
         if (resetButton) {
             resetButton.addEventListener('click', function(e) {
@@ -134,8 +140,6 @@
         const remainingTime = targetDate.getTime() - now.getTime();
         const timerElement = document.getElementById('countdown-timer');
 
-        if (!timerElement) return;
-
         if (remainingTime < 0) {
             timerElement.innerHTML = '<div class="timer-unit"><span class="timer-value">Our Wedding has Started!</span></div>';
             return;
@@ -159,54 +163,21 @@
 }
 
 // ==================================
-// ★ UPDATED: 5. Photo Gallery (Swiper.js with Lightbox)
+// 5. Photo Gallery (Slick.js)
 // ==================================
 {
-    const swiper = new Swiper('.mySwiper', {
-        loop: true,
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-        autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+    $('.slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        fade: true,
+        cssEase: 'linear',
+        slidesToShow: 1,
+        adaptiveHeight: false,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        arrows: true,
     });
-
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const closeBtn = document.querySelector('.lightbox-close');
-
-    if (lightbox) {
-        document.querySelectorAll('.swiper-slide img').forEach(img => {
-            img.addEventListener('click', () => {
-                lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
-                lightboxCaption.textContent = img.dataset.caption || '';
-            });
-        });
-
-        const closeLightbox = () => {
-            lightbox.style.display = 'none';
-        };
-
-        closeBtn.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    }
 }
 
 // ===================================
@@ -217,118 +188,66 @@
     const formMessage = document.getElementById('form-message');
     const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3A3_92ekWk0KJdHEklUR4vuM3NLaSxWGOWG8CCaxFNoZPt4XuJ0bLaHrTguuUAOv7/exec';
 
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.textContent = '送信中...';
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.textContent = '送信中...';
 
-            const formData = new FormData(form);
+        const formData = new FormData(form);
 
-            fetch(GAS_URL, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    const nameValue = formData.get('name');
-                    const attendanceValue = formData.get('attendance');
+        fetch(GAS_URL, {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Save status to localStorage
+                const nameValue = formData.get('name');
+                const attendanceValue = formData.get('attendance');
 
-                    const receptionList = ['宗野', '山内', '受付'];
-                    const familyList = ['野口', '岡副', '親族'];
-                    let role = 'guest';
+                const receptionList = ['宗野', '山内', '受付'];
+                const familyList = ['野口', '岡副', '親族'];
+                let role = 'guest';
 
-                    if (receptionList.some(receptionName => nameValue.includes(receptionName))) {
-                        role = 'reception';
-                    } else if (familyList.some(familyName => nameValue.includes(familyName))) {
-                        role = 'family';
-                    }
-
-                    const rsvpStatus = {
-                        submitted: true,
-                        role: role,
-                        attendance: attendanceValue
-                    };
-                    localStorage.setItem('weddingRsvpStatus', JSON.stringify(rsvpStatus));
-
-                    document.getElementById('rsvp-initial-view').style.display = 'none';
-                    formMessage.textContent = 'ご返信ありがとうございます。ページを更新します...';
-                    formMessage.style.display = 'block';
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1500);
-
-                } else {
-                    throw new Error('送信に失敗しました。');
+                if (receptionList.some(receptionName => nameValue.includes(receptionName))) {
+                    role = 'reception';
+                } else if (familyList.some(familyName => nameValue.includes(familyName))) {
+                    role = 'family';
                 }
-            })
-            .catch(error => {
+
+                const rsvpStatus = {
+                    submitted: true,
+                    role: role,
+                    attendance: attendanceValue
+                };
+                localStorage.setItem('weddingRsvpStatus', JSON.stringify(rsvpStatus));
+
+                // Show confirmation and reload to trigger the Omotenashi view
+                document.getElementById('rsvp-initial-view').style.display = 'none';
+                formMessage.textContent = 'ご返信ありがとうございます。ページを更新します...';
                 formMessage.style.display = 'block';
-                formMessage.textContent = 'エラーが発生しました。時間をおいて再度お試しください。';
-                formMessage.style.color = 'red';
-                submitButton.disabled = false;
-                submitButton.textContent = '送信する';
-            });
+                setTimeout(() => {
+                    location.reload();
+                }, 1500);
+
+            } else {
+                throw new Error('送信に失敗しました。');
+            }
+        })
+        .catch(error => {
+            formMessage.style.display = 'block';
+            formMessage.textContent = 'エラーが発生しました。時間をおいて再度お試しください。';
+            formMessage.style.color = 'red';
+            submitButton.disabled = false;
+            submitButton.textContent = '送信する';
         });
-    }
+    });
 }
 
 // ==================================
-// ★ ADDED: 7. Add to Calendar Function
-// ==================================
-(() => {
-    const title = "晃広＆瑠里奈 Wedding";
-    // JST (UTC+9)
-    const startTime = new Date('2025-11-08T15:00:00+09:00'); 
-    const endTime = new Date('2025-11-08T17:30:00+09:00'); // 披露宴終了を17:30と仮定
-
-    const location = "ストリングスホテル名古屋 愛知県名古屋市中村区平池町4-60-7";
-    const description = "晃広＆瑠里奈 Wedding Reception\n\n挙式：午後3時00分\n披露宴：午後3時50分\n\n当日はお気をつけてお越しください。";
-
-    // --- Google Calendar ---
-    const googleBtn = document.getElementById('google-calendar-btn');
-    if (googleBtn) {
-        const formatGoogleDate = (date) => date.toISOString().replace(/[-:.]/g, '').slice(0, -4) + 'Z';
-        const googleUrl = new URL('https://www.google.com/calendar/render');
-        googleUrl.searchParams.append('action', 'TEMPLATE');
-        googleUrl.searchParams.append('text', title);
-        googleUrl.searchParams.append('dates', `${formatGoogleDate(startTime)}/${formatGoogleDate(endTime)}`);
-        googleUrl.searchParams.append('details', description);
-        googleUrl.searchParams.append('location', location);
-        googleBtn.href = googleUrl.toString();
-    }
-    
-    // --- Apple Calendar (.ics) ---
-    const appleBtn = document.getElementById('apple-calendar-btn');
-    if (appleBtn) {
-        const formatIcsDate = (date) => {
-            const pad = (n) => n < 10 ? '0' + n : n;
-            return `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}T${pad(date.getHours())}${pad(date.getMinutes())}${pad(date.getSeconds())}`;
-        }
-        
-        const icsData = [
-            'BEGIN:VCALENDAR',
-            'VERSION:2.0',
-            'BEGIN:VEVENT',
-            'DTSTAMP:' + new Date().toISOString().replace(/[-:.]/g, ''),
-            'UID:' + Math.random().toString(36).substring(2) + '@your-wedding.com',
-            'SUMMARY:' + title,
-            'DESCRIPTION:' + description.replace(/\n/g, '\\n'),
-            'LOCATION:' + location,
-            'DTSTART;TZID=Asia/Tokyo:' + formatIcsDate(startTime),
-            'DTEND;TZID=Asia/Tokyo:' + formatIcsDate(endTime),
-            'END:VEVENT',
-            'END:VCALENDAR'
-        ].join('\r\n');
-        
-        appleBtn.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsData);
-    }
-})();
-
-// ==================================
-// 8. Initialize AOS (Scroll Animation)
+// 7. Initialize AOS (Scroll Animation)
 // ==================================
 {
     AOS.init({

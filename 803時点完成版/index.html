@@ -20,12 +20,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- External CSS Libraries (Slick -> Swiper.js) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- External CSS Libraries -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Custom Stylesheet (with cache buster) -->
-    <link rel="stylesheet" href="style.css?v=final-omotenashi-v2">
+    <link rel="stylesheet" href="style.css?v=final-omotenashi">
 </head>
 
 <body>
@@ -87,16 +88,8 @@
                     <p>挙式　　　午後3時00分</p>
                     <p>披露宴　　午後3時50分</p>
                 </div>
-
-                <!-- ★ ADDED: Calendar Buttons -->
-                <div class="add-to-calendar" data-aos="fade-up" data-aos-delay="250">
-                    <p class="calendar-guide">＼クリックでカレンダーに登録できます／</p>
-                    <a id="google-calendar-btn" class="calendar-btn google" href="#" target="_blank" rel="noopener noreferrer">Google Calendar</a>
-                    <a id="apple-calendar-btn" class="calendar-btn apple" href="#" download="Akihiro_Rurina_Wedding.ics">Apple Calendar</a>
-                </div>
-
                 <div class="ps" data-aos="fade-up" data-aos-delay="200">
-                    <p>ご多用中誠に恐縮に存じますが 挙式にもご参列賜りたく<br>
+                    <p>ご多用中誠に恐縮に存じますが 挙式にもご参列賜りたく<br class="sp-only">
                         当日午後2時40分迄に お越しくださいますようにお願い申し上げます</p>
                 </div>
                 <div class="info-item" data-aos="fade-up" data-aos-delay="300">
@@ -124,40 +117,28 @@
                 <!-- Initial View (for first-time visitors) -->
                 <div id="rsvp-initial-view">
                     <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします<br>
-                        誠に勝手ながら9月25日迄に<br class="sp-only">お返事いただければ幸いに存じます</p>
+                        尚 誠に勝手ながら9月25日迄に<br class="sp-only">お返事いただければ幸いに存じます</p>
                     <form id="rsvp-form" data-aos="fade-up" data-aos-delay="300">
                         <div class="form-group">
                             <label for="name">お名前</label>
                             <input type="text" id="name" name="name" required>
                         </div>
-                        
-                        <!-- ★ UPDATED: Accessibility with fieldset/legend -->
-                        <fieldset class="form-group">
-                            <legend>ご出欠</legend>
+                        <div class="form-group">
+                            <label>ご出欠</label>
                             <div class="radio-group">
                                 <input type="radio" id="attendance" name="attendance" value="出席" required>
                                 <label for="attendance">ご出席</label>
                                 <input type="radio" id="absence" name="attendance" value="欠席" required>
                                 <label for="absence">ご欠席</label>
                             </div>
-                        </fieldset>
-
-                        <!-- ★ ADDED: Companion Field -->
-                        <div class="form-group">
-                            <label for="companion">ご同伴者様のお名前</label>
-                            <textarea id="companion" name="companion" rows="2" placeholder="ご同伴者様がいらっしゃる場合はお名前をご記入ください"></textarea>
                         </div>
-
                         <div class="form-group">
                             <label for="allergies">アレルギー</label>
-                            <!-- ★ UPDATED: Placeholder -->
-                            <textarea id="allergies" name="allergies" rows="3" placeholder="例：甲殻類（エビ・カニ）、そば。
-ご本人様、ご同伴者様のアレルギーを全てご記入ください"></textarea>
+                            <textarea id="allergies" name="allergies" rows="3" placeholder="アレルギーがございましたらご記入ください"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="message">メッセージ</label>
-                            <!-- ★ UPDATED: Placeholder -->
-                            <textarea id="message" name="message" rows="4" placeholder="お祝いのメッセージなど、ご自由にご記入ください"></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="ご同伴者様のお名前や、お祝いのメッセージなど、ご自由にご記入ください"></textarea>
                         </div>
                         <button type="submit">送信する</button>
                     </form>
@@ -206,36 +187,21 @@
             <!-- Gallery Section -->
             <section id="gallery" class="gallery" data-aos="fade-up">
                 <h2 data-aos="fade-up">GALLERY</h2>
-                <!-- ★ UPDATED: Swiper structure -->
-                <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="images/galary1.jpg" alt="ギャラリー写真1" loading="lazy" data-caption="前撮りでの一枚。お気に入りの場所で。"></div>
-                        <div class="swiper-slide"><img src="images/galary2.jpg" alt="ギャラリー写真2" loading="lazy" data-caption="思い出のカフェにて。"></div>
-                        <div class="swiper-slide"><img src="images/galary3.jpg" alt="ギャラリー写真3" loading="lazy" data-caption="付き合って初めての旅行の写真です。"></div>
-                        <div class="swiper-slide"><img src="images/galary4.jpg" alt="ギャラリー写真4" loading="lazy" data-caption="和装での撮影も行いました。"></div>
-                        <div class="swiper-slide"><img src="images/galary5.jpg" alt="ギャラリー写真5" loading="lazy" data-caption="指輪選びの記念に。"></div>
-                        <div class="swiper-slide"><img src="images/galary6.jpg" alt="ギャラリー写真6" loading="lazy" data-caption="手作りのウェルカムボードと一緒に。"></div>
-                        <div class="swiper-slide"><img src="images/galary7.jpg" alt="ギャラリー写真7" loading="lazy" data-caption="海辺でのショット。"></div>
-                        <div class="swiper-slide"><img src="images/galary8.jpg" alt="ギャラリー写真8" loading="lazy" data-caption="プロポーズの日に撮った一枚です。"></div>
-                        <div class="swiper-slide"><img src="images/galary9.jpg" alt="ギャラリー写真9" loading="lazy" data-caption="これからも二人で歩んでいきます。"></div>
-                        <div class="swiper-slide"><img src="images/galary10.jpg" alt="ギャラリー写真10" loading="lazy" data-caption="皆様にお会いできることを楽しみにしています！"></div>
-                        <div class="swiper-slide"><img src="images/galary11.jpg" alt="ギャラリー写真11" loading="lazy" data-caption="感謝を込めて。"></div>
-                    </div>
-                    <!-- Add Pagination -->
-                    <div class="swiper-pagination"></div>
-                    <!-- Add Navigation -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                <div class="slider" data-aos="fade-up" data-aos-delay="200">
+                    <div><img src="images/galary1.jpg" alt="ギャラリー写真1" loading="lazy"></div>
+                    <div><img src="images/galary2.jpg" alt="ギャラリー写真2" loading="lazy"></div>
+                    <div><img src="images/galary3.jpg" alt="ギャラリー写真3" loading="lazy"></div>
+                    <div><img src="images/galary4.jpg" alt="ギャラリー写真4" loading="lazy"></div>
+                    <div><img src="images/galary5.jpg" alt="ギャラリー写真5" loading="lazy"></div>
+                    <div><img src="images/galary6.jpg" alt="ギャラリー写真6" loading="lazy"></div>
+                    <div><img src="images/galary7.jpg" alt="ギャラリー写真7" loading="lazy"></div>
+                    <div><img src="images/galary8.jpg" alt="ギャラリー写真8" loading="lazy"></div>
+                    <div><img src="images/galary9.jpg" alt="ギャラリー写真9" loading="lazy"></div>
+                    <div><img src="images/galary10.jpg" alt="ギャラリー写真10" loading="lazy"></div>
+                    <div><img src="images/galary11.jpg" alt="ギャラリー写真11" loading="lazy"></div>
                 </div>
             </section>
         </main>
-    </div>
-
-    <!-- ★ ADDED: Lightbox Container -->
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close">×</span>
-        <img class="lightbox-content" id="lightbox-img">
-        <div id="lightbox-caption"></div>
     </div>
 
     <!-- Footer -->
@@ -243,8 +209,9 @@
         <p>Akihiro & Rurina</p>
     </footer>
 
-    <!-- JavaScript Libraries (jQuery removed, Swiper added) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
