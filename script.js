@@ -207,7 +207,7 @@
                 const nameValue = formData.get('name');
                 const attendanceValue = formData.get('attendance');
 
-                const receptionList = ['山田', '山内', '受付'];
+                const receptionList = ['宗野', '山内', '受付'];
                 const familyList = ['野口', '岡副', '親族'];
                 let role = 'guest';
 
