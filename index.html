@@ -20,17 +20,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- External CSS Libraries (Slick -> Swiper.js) -->
+    <!-- External CSS Libraries -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Custom Stylesheet (with cache buster) -->
-    <link rel="stylesheet" href="style.css?v=final-omotenashi-v2">
+    <link rel="stylesheet" href="style.css?v=final-masterpiece">
 </head>
 
 <body>
-    <!-- Background Elements -->
-    <div class="site-background"></div>
+    <!-- スマホ用固定フッターナビゲーション -->
+    <nav id="mobile-nav" class="mobile-nav">
+        <a href="#info" class="mobile-nav-item">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">日時･場所</span>
+        </a>
+        <a href="#gallery" class="mobile-nav-item">
+            <span class="nav-icon">🖼️</span>
+            <span class="nav-label">写真</span>
+        </a>
+        <a href="#rsvp" class="mobile-nav-item">
+            <span class="nav-icon">💌</span>
+            <span class="nav-label">ご返信</span>
+        </a>
+    </nav>
+
+    <!-- 紅葉アニメーション用コンテナ -->
     <div class="momiji-container">
         <span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="2"></span><span class="momiji" data-leaf="3"></span><span class="momiji" data-leaf="1"></span><span class="momiji" data-leaf="3"></span>
     </div>
@@ -88,7 +103,6 @@
                     <p>披露宴　　午後3時50分</p>
                 </div>
 
-                <!-- ★ ADDED: Calendar Buttons -->
                 <div class="add-to-calendar" data-aos="fade-up" data-aos-delay="250">
                     <p class="calendar-guide">＼クリックでカレンダーに登録できます／</p>
                     <a id="google-calendar-btn" class="calendar-btn google" href="#" target="_blank" rel="noopener noreferrer">Google Calendar</a>
@@ -96,7 +110,7 @@
                 </div>
 
                 <div class="ps" data-aos="fade-up" data-aos-delay="200">
-                    <p>ご多用中誠に恐縮に存じますが 挙式にもご参列賜りたく<br>
+                    <p>ご多用中誠に恐縮に存じますが 挙式にもご参列賜りたく<br class="sp-only">
                         当日午後2時40分迄に お越しくださいますようにお願い申し上げます</p>
                 </div>
                 <div class="info-item" data-aos="fade-up" data-aos-delay="300">
@@ -121,7 +135,6 @@
             <section id="rsvp" class="rsvp" data-aos="fade-up">
                 <h2 data-aos="fade-up">ご返信</h2>
 
-                <!-- Initial View (for first-time visitors) -->
                 <div id="rsvp-initial-view">
                     <p data-aos="fade-up" data-aos-delay="200">お手数ですが 出欠のご登録をお願いいたします<br>
                         誠に勝手ながら9月25日迄に<br class="sp-only">お返事いただければ幸いに存じます</p>
@@ -131,7 +144,6 @@
                             <input type="text" id="name" name="name" required>
                         </div>
                         
-                        <!-- ★ UPDATED: Accessibility with fieldset/legend -->
                         <fieldset class="form-group">
                             <legend>ご出欠</legend>
                             <div class="radio-group">
@@ -142,7 +154,6 @@
                             </div>
                         </fieldset>
 
-                        <!-- ★ ADDED: Companion Field -->
                         <div class="form-group">
                             <label for="companion">ご同伴者様のお名前</label>
                             <textarea id="companion" name="companion" rows="2" placeholder="ご同伴者様がいらっしゃる場合はお名前をご記入ください"></textarea>
@@ -150,13 +161,11 @@
 
                         <div class="form-group">
                             <label for="allergies">アレルギー</label>
-                            <!-- ★ UPDATED: Placeholder -->
                             <textarea id="allergies" name="allergies" rows="3" placeholder="例：甲殻類（エビ・カニ）、そば。
 ご本人様、ご同伴者様のアレルギーを全てご記入ください"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="message">メッセージ</label>
-                            <!-- ★ UPDATED: Placeholder -->
                             <textarea id="message" name="message" rows="4" placeholder="お祝いのメッセージなど、ご自由にご記入ください"></textarea>
                         </div>
                         <button type="submit">送信する</button>
@@ -164,7 +173,6 @@
                     <p id="form-message"></p>
                 </div>
 
-                <!-- Omotenashi View (for returning visitors) -->
                 <div id="rsvp-omotenashi-view" style="display: none;">
                     <p class="omotenashi-main-message"></p>
                     <div class="omotenashi-status">
@@ -193,7 +201,6 @@
                         <p>挙式 午後3時00分 | 披露宴 午後3時50分<br>場所：ストリングスホテル名古屋</p>
                     </div>
                     <div class="omotenashi-shortcuts">
-                        <!-- Content will be dynamically inserted by JavaScript -->
                     </div>
                     <p class="omotenashi-contact"></p>
                     
@@ -203,27 +210,90 @@
                 </div>
             </section>
 
-            <!-- Gallery Section -->
+            <!-- ★★★ 修正：ギャラリーの画像を11枚に戻しました ★★★ -->
             <section id="gallery" class="gallery" data-aos="fade-up">
                 <h2 data-aos="fade-up">GALLERY</h2>
-                <!-- ★ UPDATED: Swiper structure -->
                 <div class="swiper mySwiper" data-aos="fade-up" data-aos-delay="200">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="images/galary1.jpg" alt="ギャラリー写真1" loading="lazy" data-caption="前撮りでの一枚。お気に入りの場所で。"></div>
-                        <div class="swiper-slide"><img src="images/galary2.jpg" alt="ギャラリー写真2" loading="lazy" data-caption="思い出のカフェにて。"></div>
-                        <div class="swiper-slide"><img src="images/galary3.jpg" alt="ギャラリー写真3" loading="lazy" data-caption="付き合って初めての旅行の写真です。"></div>
-                        <div class="swiper-slide"><img src="images/galary4.jpg" alt="ギャラリー写真4" loading="lazy" data-caption="和装での撮影も行いました。"></div>
-                        <div class="swiper-slide"><img src="images/galary5.jpg" alt="ギャラリー写真5" loading="lazy" data-caption="指輪選びの記念に。"></div>
-                        <div class="swiper-slide"><img src="images/galary6.jpg" alt="ギャラリー写真6" loading="lazy" data-caption="手作りのウェルカムボードと一緒に。"></div>
-                        <div class="swiper-slide"><img src="images/galary7.jpg" alt="ギャラリー写真7" loading="lazy" data-caption="海辺でのショット。"></div>
-                        <div class="swiper-slide"><img src="images/galary8.jpg" alt="ギャラリー写真8" loading="lazy" data-caption="プロポーズの日に撮った一枚です。"></div>
-                        <div class="swiper-slide"><img src="images/galary9.jpg" alt="ギャラリー写真9" loading="lazy" data-caption="これからも二人で歩んでいきます。"></div>
-                        <div class="swiper-slide"><img src="images/galary10.jpg" alt="ギャラリー写真10" loading="lazy" data-caption="皆様にお会いできることを楽しみにしています！"></div>
-                        <div class="swiper-slide"><img src="images/galary11.jpg" alt="ギャラリー写真11" loading="lazy" data-caption="感謝を込めて。"></div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary1.avif" type="image/avif">
+                                <source srcset="images/galary1.webp" type="image/webp">
+                                <img src="images/galary1.jpg" alt="ギャラリー写真1" loading="lazy" data-caption="前撮りでの一枚。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary2.avif" type="image/avif">
+                                <source srcset="images/galary2.webp" type="image/webp">
+                                <img src="images/galary2.jpg" alt="ギャラリー写真2" loading="lazy" data-caption="前撮りでの一枚。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary3.avif" type="image/avif">
+                                <source srcset="images/galary3.webp" type="image/webp">
+                                <img src="images/galary3.jpg" alt="ギャラリー写真3" loading="lazy" data-caption="前撮りでの一枚。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary4.avif" type="image/avif">
+                                <source srcset="images/galary4.webp" type="image/webp">
+                                <img src="images/galary4.jpg" alt="ギャラリー写真4" loading="lazy" data-caption="サンピエトロ大聖堂前にて。スケールの大きさに圧倒、、">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary5.avif" type="image/avif">
+                                <source srcset="images/galary5.webp" type="image/webp">
+                                <img src="images/galary5.jpg" alt="ギャラリー写真5" loading="lazy" data-caption="コロッセオにて。この直前、私たちはぼったくられてます。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary6.avif" type="image/avif">
+                                <source srcset="images/galary6.webp" type="image/webp">
+                                <img src="images/galary6.jpg" alt="ギャラリー写真6" loading="lazy" data-caption="シンデレラ城の前で。夢のような時間でした。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary7.avif" type="image/avif">
+                                <source srcset="images/galary7.webp" type="image/webp">
+                                <img src="images/galary7.jpg" alt="ギャラリー写真7" loading="lazy" data-caption="ミッキーにも会いました">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary8.avif" type="image/avif">
+                                <source srcset="images/galary8.webp" type="image/webp">
+                                <img src="images/galary8.jpg" alt="ギャラリー写真8" loading="lazy" data-caption="二人で浴衣で花火大会へ。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary9.avif" type="image/avif">
+                                <source srcset="images/galary9.webp" type="image/webp">
+                                <img src="images/galary9.jpg" alt="ギャラリー写真9" loading="lazy" data-caption="茶臼山の芝桜をバックに。2回行きました。1回目は時期を誤りました、、">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary10.avif" type="image/avif">
+                                <source srcset="images/galary10.webp" type="image/webp">
+                                <img src="images/galary10.jpg" alt="ギャラリー写真10" loading="lazy" data-caption="なばなの里にて。瑠里奈を癒してくれた花たち。">
+                            </picture>
+                        </div>
+                        <div class="swiper-slide">
+                            <picture>
+                                <source srcset="images/galary11.avif" type="image/avif">
+                                <source srcset="images/galary11.webp" type="image/webp">
+                                <img src="images/galary11.jpg" alt="ギャラリー写真11" loading="lazy" data-caption="付き合って初めて撮ったツーショット">
+                            </picture>
+                        </div>
                     </div>
-                    <!-- Add Pagination -->
                     <div class="swiper-pagination"></div>
-                    <!-- Add Navigation -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
@@ -231,7 +301,7 @@
         </main>
     </div>
 
-    <!-- ★ ADDED: Lightbox Container -->
+    <!-- Lightbox Container -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">×</span>
         <img class="lightbox-content" id="lightbox-img">
@@ -243,7 +313,7 @@
         <p>Akihiro & Rurina</p>
     </footer>
 
-    <!-- JavaScript Libraries (jQuery removed, Swiper added) -->
+    <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>

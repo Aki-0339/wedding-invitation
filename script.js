@@ -1,18 +1,6 @@
 'use strict';
 
 // ==================================
-// 0. Fix for Mobile Viewport Height
-// ==================================
-(() => {
-    const setVh = () => {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    window.addEventListener('load', setVh);
-    window.addEventListener('resize', setVh);
-})();
-
-// ==================================
 // 1. Omotenashi View Logic
 // ==================================
 (() => {
@@ -69,7 +57,7 @@
                     infoGuest.style.display = 'block';
                     break;
             }
-        } else { // If absent
+        } else {
             infoAbsence.style.display = 'block';
             commonInfo.style.display = 'none';
             shortcuts.innerHTML = `
@@ -159,7 +147,7 @@
 }
 
 // ==================================
-// ★ UPDATED: 5. Photo Gallery (Swiper.js with Lightbox)
+// 5. Photo Gallery (Swiper.js with Lightbox)
 // ==================================
 {
     const swiper = new Swiper('.mySwiper', {
@@ -191,7 +179,7 @@
         document.querySelectorAll('.swiper-slide img').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
-                lightboxImg.src = img.src;
+                lightboxImg.src = img.closest('picture').querySelector('source[type="image/webp"], source[type="image/avif"], img').currentSrc || img.src;
                 lightboxCaption.textContent = img.dataset.caption || '';
             });
         });
@@ -214,10 +202,10 @@
 // ===================================
 {
     const form = document.getElementById('rsvp-form');
-    const formMessage = document.getElementById('form-message');
-    const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3A3_92ekWk0KJdHEklUR4vuM3NLaSxWGOWG8CCaxFNoZPt4XuJ0bLaHrTguuUAOv7/exec';
-
     if (form) {
+        const formMessage = document.getElementById('form-message');
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3A3_92ekWk0KJdHEklUR4vuM3NLaSxWGOWG8CCaxFNoZPt4XuJ0bLaHrTguuUAOv7/exec';
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const submitButton = form.querySelector('button[type="submit"]');
@@ -235,7 +223,6 @@
                 if (data.status === 'success') {
                     const nameValue = formData.get('name');
                     const attendanceValue = formData.get('attendance');
-
                     const receptionList = ['宗野', '山内', '受付'];
                     const familyList = ['野口', '岡副', '親族'];
                     let role = 'guest';
@@ -256,6 +243,7 @@
                     document.getElementById('rsvp-initial-view').style.display = 'none';
                     formMessage.textContent = 'ご返信ありがとうございます。ページを更新します...';
                     formMessage.style.display = 'block';
+                    formMessage.classList.add('is-show');
                     setTimeout(() => {
                         location.reload();
                     }, 1500);
@@ -268,6 +256,7 @@
                 formMessage.style.display = 'block';
                 formMessage.textContent = 'エラーが発生しました。時間をおいて再度お試しください。';
                 formMessage.style.color = 'red';
+                formMessage.classList.add('is-show');
                 submitButton.disabled = false;
                 submitButton.textContent = '送信する';
             });
@@ -276,18 +265,15 @@
 }
 
 // ==================================
-// ★ ADDED: 7. Add to Calendar Function
+// 7. Add to Calendar Function
 // ==================================
 (() => {
     const title = "晃広＆瑠里奈 Wedding";
-    // JST (UTC+9)
     const startTime = new Date('2025-11-08T15:00:00+09:00'); 
-    const endTime = new Date('2025-11-08T17:30:00+09:00'); // 披露宴終了を17:30と仮定
-
+    const endTime = new Date('2025-11-08T17:30:00+09:00');
     const location = "ストリングスホテル名古屋 愛知県名古屋市中村区平池町4-60-7";
     const description = "晃広＆瑠里奈 Wedding Reception\n\n挙式：午後3時00分\n披露宴：午後3時50分\n\n当日はお気をつけてお越しください。";
 
-    // --- Google Calendar ---
     const googleBtn = document.getElementById('google-calendar-btn');
     if (googleBtn) {
         const formatGoogleDate = (date) => date.toISOString().replace(/[-:.]/g, '').slice(0, -4) + 'Z';
@@ -300,7 +286,6 @@
         googleBtn.href = googleUrl.toString();
     }
     
-    // --- Apple Calendar (.ics) ---
     const appleBtn = document.getElementById('apple-calendar-btn');
     if (appleBtn) {
         const formatIcsDate = (date) => {

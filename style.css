@@ -20,11 +20,6 @@
 html {
     scroll-behavior: smooth;
 }
-@media (max-width: 768px) {
-    html {
-        font-size: 90.625%; /* 14.5px */
-    }
-}
 
 body {
     margin: 0;
@@ -33,7 +28,33 @@ body {
     line-height: 1.9;
     background-color: var(--background-color);
     overflow-x: hidden;
-    word-break: keep-all; /* Prevents awkward word breaks in Japanese */
+    word-break: keep-all;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('images/waso_background_sp.webp'), url('images/waso_background_sp.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    z-index: -1;
+    transition: opacity 1s ease-out, filter 1s ease-out;
+    filter: brightness(0.9) contrast(1.1);
+}
+@media (min-width: 769px) {
+    body::before {
+        background-image: url('images/waso_background_pc.webp'), url('images/waso_background_pc.jpg');
+    }
+}
+body.scrolled body::before {
+    opacity: 0.7;
+    filter: brightness(0.8) contrast(1.1);
 }
 
 img {
@@ -42,7 +63,9 @@ img {
     vertical-align: bottom;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: var(--font-serif-en), serif;
     font-weight: 700;
     margin-top: 0;
@@ -54,7 +77,6 @@ h2 {
     font-size: 2.5rem;
     color: var(--primary-color);
     text-shadow: none;
-    /* ★ ADDED: Mizuhiki line style */
     position: relative;
     padding-bottom: 20px;
     margin-bottom: 40px;
@@ -72,32 +94,13 @@ h2::after {
     border-radius: 1px;
 }
 
-
 section {
-    padding: 40px 20px;
+    padding: 30px 20px;
 }
 
 /*==============================================
   2. Z-index Layer Management
 ===============================================*/
-.site-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100); /* Fix for mobile browser UI */
-    background-image: url('images/waso_background_sp.jpg');
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    filter: brightness(0.9) contrast(1.1);
-    transition: opacity 1s ease-out, filter 1s ease-out;
-}
-body.scrolled .site-background {
-    opacity: 0.7;
-    filter: brightness(0.8) contrast(1.1);
-}
-
 .momiji-container {
     position: fixed;
     top: 0;
@@ -108,14 +111,15 @@ body.scrolled .site-background {
     pointer-events: none;
 }
 
-.hero, .wrapper, footer {
+.hero,
+.wrapper,
+footer {
     position: relative;
     z-index: 2;
 }
 
 #loading { z-index: 99999; }
-.lightbox { z-index: 10000; } /* ★ ADDED: Lightbox z-index */
-
+.lightbox { z-index: 10000; }
 
 /*==============================================
   3. Falling Leaves Animation
@@ -130,7 +134,6 @@ body.scrolled .site-background {
 .momiji:nth-child(3n + 1) { animation-name: fall; animation-timing-function: ease-in-out; }
 .momiji:nth-child(3n + 2) { animation-name: sway-left; animation-timing-function: linear; }
 .momiji:nth-child(3n) { animation-name: sway-right-fast; animation-timing-function: ease-out; }
-/* Individual leaf settings omitted for brevity */
 .momiji:nth-child(1){left:5%;width:25px;height:25px;animation-duration:40s;animation-delay:-8s}.momiji:nth-child(2){left:10%;width:40px;height:40px;animation-duration:32s;animation-delay:-18s}.momiji:nth-child(3){left:15%;width:30px;height:30px;animation-duration:50s;animation-delay:-1s}.momiji:nth-child(4){left:20%;width:22px;height:22px;animation-duration:20s;animation-delay:-8s}.momiji:nth-child(5){left:25%;width:28px;height:28px;animation-duration:60s;animation-delay:-20s}.momiji:nth-child(6){left:30%;width:18px;height:18px;animation-duration:21s;animation-delay:-10s}.momiji:nth-child(7){left:35%;width:32px;height:32px;animation-duration:48s;animation-delay:-4s}.momiji:nth-child(8){left:40%;width:24px;height:24px;animation-duration:42s;animation-delay:-31s}.momiji:nth-child(9){left:45%;width:29px;height:29px;animation-duration:25s;animation-delay:-2s}.momiji:nth-child(10){left:50%;width:40px;height:40px;animation-duration:14s;animation-delay:-18s}.momiji:nth-child(11){left:55%;width:25px;height:25px;animation-duration:70s;animation-delay:-9s}.momiji:nth-child(12){left:60%;width:30px;height:30px;animation-duration:21s;animation-delay:-1s}.momiji:nth-child(13){left:65%;width:22px;height:22px;animation-duration:40s;animation-delay:-4s}.momiji:nth-child(14){left:70%;width:28px;height:28px;animation-duration:51s;animation-delay:-11s}.momiji:nth-child(15){left:75%;width:40px;height:40px;animation-duration:18s;animation-delay:-3s}.momiji:nth-child(16){left:80%;width:32px;height:32px;animation-duration:39s;animation-delay:-26s}.momiji:nth-child(17){left:85%;width:24px;height:24px;animation-duration:43s;animation-delay:-8s}.momiji:nth-child(18){left:90%;width:29px;height:29px;animation-duration:24s;animation-delay:-18s}.momiji:nth-child(19){left:95%;width:40px;height:40px;animation-duration:52s;animation-delay:-5s}.momiji:nth-child(20){left:2%;width:30px;height:30px;animation-duration:47s;animation-delay:-12s}
 
 /*==============================================
@@ -159,8 +162,8 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
   5. Main Content Wrapper & Sections
 ===============================================*/
 .wrapper { max-width: 900px; margin: 0 auto; overflow: hidden; padding: 0 20px; }
-#greeting, .info, .gallery, .rsvp, .countdown { background: var(--content-bg-color); border: 1px solid var(--border-color); border-radius: 10px; margin: 0 auto 40px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; }
-.wrapper > main > section:first-child { margin-top: 40px; }
+#greeting, .info, .gallery, .rsvp, .countdown { background: var(--content-bg-color); border: 1px solid var(--border-color); border-radius: 10px; margin: 0 auto 30px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08); position: relative; overflow: hidden; }
+.wrapper > main > section:first-child { margin-top: 30px; }
 
 /*==============================================
   6. Individual Sections
@@ -170,22 +173,19 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 #greeting .greeting-message { display: inline-block; writing-mode: vertical-rl; text-orientation: mixed; letter-spacing: 0.15em; line-height: 2; font-size: 1rem; margin: 20px auto; height: 520px; text-align: left; }
 #greeting .greeting-date, #greeting .greeting-names { text-align: right; margin-top: 20px; }
 
-/* Information */
+/* Information & Calendar */
 .info-item { margin-bottom: 40px; text-align: center; }
 .info-item h3 { color: var(--primary-color); }
 .ps { margin-bottom: 40px; text-align: center; font-size: 0.9rem; }
 #map { max-width: 800px; width: 95%; height: 400px; margin: 20px auto 0; border-radius: 8px; overflow: hidden; }
 #map iframe { width: 100%; height: 100%; border: 0; }
-
-/* ★ ADDED: Calendar Button Styles */
 .add-to-calendar { text-align: center; margin: 30px auto 40px; padding: 20px; background-color: #fcfaf7; border-radius: 8px; border: 1px solid var(--border-color); }
 .calendar-guide { font-size: 0.9rem; color: var(--primary-color); margin-bottom: 15px; }
-.calendar-btn { display: inline-block; margin: 5px; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; transition: all 0.3s; border: 1px solid; font-size: 0.9rem; }
+.calendar-btn { display: inline-block; margin: 5px; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; border: 1px solid; font-size: 0.9rem; }
 .calendar-btn.google { background-color: #4285F4; color: #fff; border-color: #4285F4; }
 .calendar-btn.google:hover { background-color: #fff; color: #4285F4; }
 .calendar-btn.apple { background-color: #000; color: #fff; border-color: #000; }
 .calendar-btn.apple:hover { background-color: #fff; color: #000; }
-
 
 /* Countdown */
 .countdown { padding: 60px 20px; }
@@ -195,28 +195,20 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .timer-value { font-size: 4rem; font-weight: bold; font-family: var(--font-serif-en), serif; line-height: 1; color: var(--primary-color); }
 .timer-label { font-size: 1rem; font-family: var(--font-serif-jp), serif; letter-spacing: 1px; color: var(--text-color); opacity: 0.8; }
 
-/* ★ UPDATED: Gallery (Swiper & Lightbox) */
+/* Gallery, Swiper & Lightbox */
 .gallery { overflow: visible; padding-bottom: 60px; }
 .swiper { width: 100%; height: 100%; }
 .swiper-slide { text-align: center; font-size: 18px; background: var(--content-bg-color); display: flex; justify-content: center; align-items: center; aspect-ratio: 1 / 1; cursor: pointer; }
-.swiper-slide img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 8px; transition: transform 0.3s ease; }
-.swiper-slide:hover img { transform: scale(1.05); }
-.swiper-button-next, .swiper-button-prev { color: var(--primary-color); transition: opacity 0.3s; }
+.swiper-slide img { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.swiper-button-next, .swiper-button-prev { color: var(--primary-color); }
 .swiper-button-next:after, .swiper-button-prev:after { font-size: 2rem !important; }
-.swiper:hover .swiper-button-next, .swiper:hover .swiper-button-prev { opacity: 1; }
 .swiper-pagination-bullet-active { background: var(--primary-color); }
-@media (max-width: 768px) {
-    .swiper-button-next, .swiper-button-prev { display: none; }
-}
-
-/* ★ ADDED: Lightbox Styles */
 .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); align-items: center; justify-content: center; flex-direction: column; animation: fadeIn 0.5s; }
 .lightbox-content { margin: auto; display: block; max-width: 90vw; max-height: 80vh; }
 #lightbox-caption { text-align: center; color: #ccc; padding: 20px 0; font-family: var(--font-serif-jp); font-size: 1rem; line-height: 1.6; }
 .lightbox-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
 .lightbox-close:hover, .lightbox-close:focus { color: #bbb; text-decoration: none; }
 @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-
 
 /* RSVP Form */
 .rsvp p { text-align: center; }
@@ -226,14 +218,10 @@ body.scrolled .hero-inner { opacity: 0; pointer-events: none; transition: opacit
 .form-group input[type="text"], .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: var(--font-serif-jp), serif; font-size: 1rem; background-color: #fdfdfd; }
 .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; color: var(--text-color); }
 .radio-group input[type="radio"] { margin-right: 5px; }
-button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: var(--primary-color); color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
-button[type="submit"]:hover { background-color: #a07d50; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); }
+button[type="submit"] { display: block; width: 100%; padding: 15px; background-color: var(--primary-color); color: white; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
 #form-message { text-align: center; font-size: 1rem; padding: 40px 20px; display: none; opacity: 0; transition: opacity 1.5s; white-space: pre-wrap; color: var(--text-color); }
 #form-message.is-show { opacity: 1; }
-
-/* ★ ADDED: Fieldset style for accessibility */
 fieldset { border: none; padding: 0; margin: 0; }
-legend { padding: 0; width: 100%; }
 
 /* Omotenashi View */
 #rsvp-omotenashi-view { text-align: center; padding: 20px; }
@@ -248,10 +236,8 @@ legend { padding: 0; width: 100%; }
 .omotenashi-info p { margin: 0; line-height: 1.8; }
 .omotenashi-common-info { font-size: 0.9em; opacity: 0.9; margin-bottom: 30px; }
 .omotenashi-shortcuts { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
-.shortcut-btn { display: inline-block; padding: 10px 20px; border: 1px solid var(--primary-color); color: var(--primary-color); text-decoration: none; border-radius: 20px; font-size: 0.9rem; transition: all 0.3s; }
-.shortcut-btn:hover { background-color: var(--primary-color); color: #fff; }
+.shortcut-btn { display: inline-block; padding: 10px 20px; border: 1px solid var(--primary-color); color: var(--primary-color); text-decoration: none; border-radius: 20px; font-size: 0.9rem; }
 .omotenashi-contact { font-size: 0.8em; opacity: 0.8; line-height: 1.7; }
-
 .rsvp-reset-wrapper { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-color); }
 .rsvp-reset-link { font-size: 0.8em; color: #888; text-decoration: underline; cursor: pointer; transition: color 0.3s; }
 .rsvp-reset-link:hover { color: var(--primary-color); }
@@ -260,37 +246,134 @@ legend { padding: 0; width: 100%; }
 footer { text-align: center; padding: 40px 20px; background-color: transparent; color: var(--text-color); opacity: 0.7; font-family: var(--font-serif-en), serif; }
 
 /*==============================================
-  7. Responsive Design
+  7. Responsive Design (Base)
 ===============================================*/
-/* SP-only line break */
 .sp-only { display: none; }
 @media (max-width: 768px) {
     .sp-only { display: block; }
-
-    /* ★★★ ここから追記 ★★★ */
-    .wrapper {
-        /* スマートフォンでは左右の余白を15pxに縮小 */
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-/* PC-specific background */
-@media (min-width: 769px) {
-    .site-background { background-image: url('images/waso_background_pc.jpg'); }
-}
-
-/* SP-specific adjustments */
-@media (max-width: 768px) {
     h2 { font-size: 2rem; }
     #greeting .greeting-inner { padding: 40px 15px; }
     #greeting .greeting-message { writing-mode: horizontal-tb; text-align: left; height: auto; margin: 30px auto; }
     #greeting .greeting-date,
     #greeting .greeting-names { text-align: right; }
-
     .ps { font-size: 0.85rem; }
-
     #countdown-timer { gap: 15px; row-gap: 25px; }
     .timer-value { font-size: 3rem; }
     .timer-label { font-size: 0.75rem; letter-spacing: 0; }
+    .swiper-button-next, .swiper-button-prev { display: none; }
+}
+
+/*==============================================
+  8. UI Polish: Transitions & Hover Effects
+===============================================*/
+a, button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+.shortcut-btn, .calendar-btn, button[type="submit"] {
+    transition: all 0.3s ease;
+}
+.shortcut-btn:hover, .calendar-btn:hover, button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.swiper-slide img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.swiper-slide:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/*==============================================
+   9. Mobile-First Optimizations
+   ==============================================*/
+.mobile-nav {
+    display: none;
+}
+@media (max-width: 768px) {
+    html {
+        font-size: 93.75%;
+    }
+    body {
+        line-height: 1.8;
+        padding-bottom: 70px; 
+    }
+    .wrapper {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    }
+    .mobile-nav-item {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--text-color);
+        font-size: 0.7rem;
+        font-family: var(--font-serif-jp);
+        gap: 2px;
+        padding: 5px 0;
+    }
+    .mobile-nav-item .nav-icon {
+        font-size: 1.2rem;
+    }
+}
+
+/*==============================================
+   10. Dark Mode Support
+   ==============================================*/
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #2a2826;
+        color: #d1cdc7;
+    }
+    body::before {
+        filter: brightness(0.6) contrast(1.1);
+    }
+    #greeting, .info, .gallery, .rsvp, .countdown {
+        background: #3c3a38;
+        border-color: #544a47;
+    }
+    h2, .info-item h3, .timer-value, .status-attendance.attending,
+    .omotenashi-info .info-title, .shortcut-btn:hover {
+        color: #d4af87;
+    }
+    h2::after {
+        background: linear-gradient(to right, #d4af87, #e0c8aa, #d4af87);
+    }
+    .form-group input[type="text"], .form-group textarea {
+        background-color: #2a2826;
+        border-color: #544a47;
+        color: #d1cdc7;
+    }
+    .shortcut-btn { color: #d4af87; border-color: #d4af87; }
+    .swiper-pagination-bullet-active { background: #d4af87; }
+    .swiper-button-next, .swiper-button-prev { color: #d4af87; }
+    #lightbox-caption { color: #aaa; }
+    .omotenashi-info, .add-to-calendar { background-color: #353331; }
+    
+    @media (max-width: 768px) {
+        .mobile-nav {
+            background-color: rgba(40, 40, 40, 0.9);
+            border-top-color: #544a47;
+        }
+        .mobile-nav-item { color: #d1cdc7; }
+    }
 }
