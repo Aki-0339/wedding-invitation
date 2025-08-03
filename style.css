@@ -42,7 +42,7 @@ body::before {
     background-image: url('images/waso_background_sp.webp'), url('images/waso_background_sp.jpg');
     background-size: cover;
     background-position: center center;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     z-index: -1;
     transition: opacity 1s ease-out, filter 1s ease-out;
     filter: brightness(0.9) contrast(1.1);
