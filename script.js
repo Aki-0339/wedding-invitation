@@ -179,7 +179,8 @@
         document.querySelectorAll('.swiper-slide img').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
-                lightboxImg.src = img.closest('picture').querySelector('source[type="image/webp"], source[type="image/avif"], img').currentSrc || img.src;
+                // ★★★ 修正箇所 ★★★
+                lightboxImg.src = img.src; 
                 lightboxCaption.textContent = img.dataset.caption || '';
             });
         });
