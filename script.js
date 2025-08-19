@@ -225,7 +225,7 @@
                     const nameValue = formData.get('name');
                     const attendanceValue = formData.get('attendance');
                     const receptionList = ['宗野', '山内', '受付'];
-                    const familyList = ['野口', '岡副', '親族'];
+                    const familyList = ['野口', '岡副','成願','安井','塩谷', '親族'];
                     let role = 'guest';
 
                     if (receptionList.some(receptionName => nameValue.includes(receptionName))) {
