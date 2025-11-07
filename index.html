@@ -248,6 +248,31 @@
                     <div class="swiper-button-prev"></div>
                 </div>
             </section>
+
+            <!-- Photo Sharing Section -->
+            <section id="photo-sharing" class="photo-sharing" data-aos="fade-up">
+                <h2 data-aos="fade-up">PHOTO SHARING</h2>
+                <div id="password-section" style="text-align: center;">
+                    <p data-aos="fade-up" data-aos-delay="200">
+                        皆様が撮影した写真も、ぜひ共有してください！！<br>
+                        お伝えしたパスワードを入力すると、<br class="sp-only">共有アルバムへのリンクが表示されます
+                    </p>
+                    <form id="password-form" data-aos="fade-up" data-aos-delay="300">
+                        <div class="form-group">
+                            <label for="password">パスワード</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit">アルバムを見る</button>
+                        <p id="password-error" style="color: red; display: none; margin-top: 15px;">パスワードが違います</p>
+                    </form>
+                </div>
+
+                <div id="photo-links" style="display: none; text-align: center;">
+                    <p>ありがとうございます！<br>以下のリンクから写真の閲覧と投稿ができます。</p>
+                    <a href="https://photos.app.goo.gl/SHrjfX2SY7nopM478" target="_blank" class="shortcut-btn" style="font-size: 1rem; padding: 12px 25px;">共有アルバムを開く</a>
+                    <p style="font-size: 0.8em; margin-top: 20px; opacity: 0.8;">※リンクをタップするとGoogleフォトが開きます。<br>写真の追加もこちらから行えます。</p>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -267,6 +292,9 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
+
+
+    
 </body>
 
 </html>

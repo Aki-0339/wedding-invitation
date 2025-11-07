@@ -322,3 +322,31 @@
         once: false,
     });
 }
+
+// ==================================
+// 9. Photo Sharing Password Logic
+// ==================================
+(() => {
+    const passwordForm = document.getElementById('password-form');
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // ★★★ ここにゲストに知らせるパスワードを設定してください ★★★
+            const correctPassword = 'akiruri'; 
+            
+            const passwordInput = document.getElementById('password');
+            const enteredPassword = passwordInput.value;
+            const errorElement = document.getElementById('password-error');
+            
+            if (enteredPassword === correctPassword) {
+                document.getElementById('password-section').style.display = 'none';
+                document.getElementById('photo-links').style.display = 'block';
+                errorElement.style.display = 'none';
+            } else {
+                errorElement.style.display = 'block';
+                passwordInput.value = ''; // 入力内容をクリア
+            }
+        });
+    }
+})();
