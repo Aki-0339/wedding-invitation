@@ -333,7 +333,7 @@
             e.preventDefault();
             
             // ★★★ ここにゲストに知らせるパスワードを設定してください ★★★
-            const correctPassword = 'akiruri'; 
+            const correctPassword = '2525akiruri'; 
             
             const passwordInput = document.getElementById('password');
             const enteredPassword = passwordInput.value;
